@@ -19,7 +19,7 @@
       VAppBarNavIcon(@click.stop="drawer = !drawer")
 
       VToolbarTitle
-        | Repo.vue
+        | Articles
 
       VSpacer
 

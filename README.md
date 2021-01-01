@@ -1,4 +1,4 @@
-# Repo.vue
+# Articles
 
 ## Project setup
 ```
