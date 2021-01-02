@@ -7,9 +7,10 @@
           VListItem(to="/" link)
             VListItemContent
               VListItemTitle Home
-          VListItem(to="/about" link)
+
+          VListItem(to="/articles/new" link)
             VListItemContent
-              VListItemTitle About
+              VListItemTitle New Article
 
     VAppBar(
       app
@@ -24,6 +25,7 @@
       VSpacer
 
       VDarkmodeToggle
+
       VFullscreenToggle
 
     VMain
