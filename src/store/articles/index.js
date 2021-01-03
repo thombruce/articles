@@ -24,16 +24,32 @@ const actions = {
     commit('init', articles)
   },
   async create ({ commit }, params) {
-    await db.addArticle(params.data)
-    commit('post', params)
+    const timestamp = new Date().getTime()
+    const data = {
+      ...params.data,
+      ...{ id: uuidv4(), createdAt: timestamp, updatedAt: timestamp }
+    }
+
+    await db.addArticle(data).then(() => {
+      commit('insert', data)
+    })
   },
-  async update ({ commit }, params) {
-    await db.updateArticle(params.id, params.data)
-    commit('patch', params)
+  async update ({ state, commit }, params) {
+    const timestamp = new Date().getTime()
+    const data = {
+      ...state.list[params.id],
+      ...params.data,
+      ...{ updatedAt: timestamp }
+    }
+
+    await db.updateArticle(params.id, data).then(() => {
+      commit('insert', data)
+    })
   },
   async destroy ({ commit }, params) {
-    await db.deleteArticle(params.id)
-    commit('delete', params)
+    await db.deleteArticle(params.id).then(() => {
+      commit('delete', params)
+    })
   }
 }
 
@@ -47,13 +63,8 @@ const mutations = {
 
     state.list = data
   },
-  post (state, payload) {
-    const data = { ...{ id: uuidv4() }, ...payload.data }
-    Vue.set(state.list, data.id, data)
-  },
-  patch (state, payload) {
-    const data = { ...state.list[payload.id], ...payload.data }
-    Vue.set(state.list, payload.id, data)
+  insert (state, payload) {
+    Vue.set(state.list, payload.id, payload)
   },
   delete (state, payload) {
     Vue.delete(state.list, payload.id)
