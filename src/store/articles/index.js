@@ -1,6 +1,10 @@
 import Vue from 'vue'
 import { v4 as uuidv4 } from 'uuid'
 
+import { Database } from '@/database.js'
+
+const db = new Database()
+
 const state = () => ({
   list: {}
 })
@@ -15,18 +19,34 @@ const getters = {
 }
 
 const actions = {
-  create ({ commit }, params) {
+  async loadDb ({ commit }) {
+    const articles = await db.getArticles()
+    commit('init', articles)
+  },
+  async create ({ commit }, params) {
+    await db.addArticle(params.data)
     commit('post', params)
   },
-  update ({ commit }, params) {
+  async update ({ commit }, params) {
+    await db.updateArticle(params.id, params.data)
     commit('patch', params)
   },
-  destroy ({ commit }, params) {
+  async destroy ({ commit }, params) {
+    await db.deleteArticle(params.id)
     commit('delete', params)
   }
 }
 
 const mutations = {
+  init (state, payload) {
+    // Convert the Array received from Dexie Db to an Object with IDs as keys.
+    const data = payload.reduce((obj, item) => {
+      obj[item.id] = item
+      return obj
+    }, {})
+
+    state.list = data
+  },
   post (state, payload) {
     const data = { ...{ id: uuidv4() }, ...payload.data }
     Vue.set(state.list, data.id, data)

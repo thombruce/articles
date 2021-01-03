@@ -15,6 +15,8 @@
   "dependencies": {
     "@mdi/font": "^3.6.95",
     "core-js": "^3.6.5",
+    "dexie": "^3.0.3",
+    "dexie-observable": "^3.0.0-beta.10",
     "register-service-worker": "^1.7.1",
     "roboto-fontface": "*",
     "uuid": "^8.3.2",
