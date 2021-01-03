@@ -5,11 +5,7 @@
 
       RouterLink(:to="{ name: 'NewArticle' }") New article
 
-      VDataTable(
-        :headers="[{text: 'Title', value: 'title'}, {text: 'Content', value: 'content'}, {text: 'Actions', value: 'actions', sortable: false}]"
-        :items="articles"
-        :items-per-page="5"
-      )
+      VDataTable(:headers="headers" :items="articles" :items-per-page="5")
         template(v-slot:item.actions="{ item }")
           VBtn(icon :to="{ name: 'ShowArticle', params: { id: item.id } }")
             VIcon(small) mdi-eye
@@ -25,6 +21,15 @@
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
+  data () {
+    return {
+      headers: [
+        { text: 'Title', value: 'title' },
+        { text: 'Content', value: 'content' },
+        { text: 'Actions', value: 'actions', sortable: false }
+      ]
+    }
+  },
   computed: {
     ...mapGetters('articles', {
       articles: 'all'
