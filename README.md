@@ -22,3 +22,7 @@ yarn lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## Reference
+
+- https://itnext.io/electron-application-with-vue-js-and-vuetify-f2a1f9c749b8
