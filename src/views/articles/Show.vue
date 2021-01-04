@@ -3,13 +3,18 @@ div
   VContainer
     h2 {{ article.title }}
 
-    div {{ article.content }}
+    VRichTextEditor(v-model="article.content" :editable="false")
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 
+import VRichTextEditor from '@/components/v-rich-text-editor'
+
 export default {
+  components: {
+    VRichTextEditor
+  },
   computed: {
     ...mapGetters('articles', {
       find: 'find'
