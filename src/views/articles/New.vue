@@ -21,7 +21,7 @@ export default {
     return {
       article: {
         title: '',
-        content: null
+        content: ''
       }
     }
   },

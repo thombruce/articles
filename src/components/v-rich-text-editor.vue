@@ -189,7 +189,10 @@ import {
 export default {
   props: {
     label: String,
-    value: Object,
+    value: {
+      type: [Object, String],
+      required: true
+    },
     editable: {
       type: Boolean,
       default: true
