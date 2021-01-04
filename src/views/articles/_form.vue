@@ -1,7 +1,5 @@
 <template lang="pug">
 VForm(ref="form" :model="article" @submit.prevent="onSubmit()")
-  VTextField(label="Title" v-model="article.title")
-
   VRichTextEditor(v-model="article.content" :editable="true")
 
   VBtn(color="primary" type="submit") Submit

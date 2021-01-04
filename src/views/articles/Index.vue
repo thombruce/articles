@@ -6,6 +6,10 @@
       RouterLink(:to="{ name: 'NewArticle' }") New article
 
       VDataTable(:headers="headers" :items="articles" :items-per-page="5")
+        template(v-slot:item.content="{ item }")
+          // VRichTextEditor(v-model="item.content" :editable="false")
+          | {{ item.content }}
+
         template(v-slot:item.actions="{ item }")
           VBtn(icon :to="{ name: 'ShowArticle', params: { id: item.id } }")
             VIcon(small) mdi-eye
@@ -20,11 +24,15 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 
+// import VRichTextEditor from '@/components/v-rich-text-editor'
+
 export default {
+  // components: {
+  //   VRichTextEditor
+  // },
   data () {
     return {
       headers: [
-        { text: 'Title', value: 'title' },
         { text: 'Content', value: 'content' },
         { text: 'Actions', value: 'actions', sortable: false }
       ]

@@ -1,8 +1,6 @@
 <template lang="pug">
 div
   VContainer
-    h2 {{ article.title }}
-
     VRichTextEditor(v-model="article.content" :editable="false")
 </template>
 
