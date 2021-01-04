@@ -11,9 +11,6 @@
           | {{ item.content }}
 
         template(v-slot:item.actions="{ item }")
-          VBtn(icon :to="{ name: 'ShowArticle', params: { id: item.id } }")
-            VIcon(small) mdi-eye
-
           VBtn(icon :to="{ name: 'EditArticle', params: { id: item.id } }")
             VIcon(small) mdi-pencil
 
