@@ -12,20 +12,22 @@ const routes = [
   {
     path: '/articles',
     name: 'Articles',
-    component: Articles
-  },
-  {
-    path: '/articles/new',
-    name: 'NewArticle',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "newArticle" */ '../views/articles/New.vue')
-  },
-  {
-    path: '/articles/:id',
-    name: 'EditArticle',
-    component: () => import(/* webpackChunkName: "showArticle" */ '../views/articles/Edit.vue')
+    component: Articles,
+    children: [
+      {
+        path: '/articles/new',
+        name: 'NewArticle',
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () => import(/* webpackChunkName: "newArticle" */ '../views/articles/New.vue')
+      },
+      {
+        path: '/articles/:id',
+        name: 'EditArticle',
+        component: () => import(/* webpackChunkName: "showArticle" */ '../views/articles/Edit.vue')
+      }
+    ]
   }
 ]
 

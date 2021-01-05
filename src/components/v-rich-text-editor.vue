@@ -1,115 +1,115 @@
 <template lang="pug">
 div.mb-4
-  v-label(v-if="label") {{ label }}
+  VLabel(v-if="label") {{ label }}
 
-  v-card
-    editor-menu-bar(v-if="editable" :editor="editor" v-slot="{ commands, isActive }")
-      v-toolbar(color="primary" dark dense flat)
-        v-menu
+  VCard
+    EditorMenuBar(v-if="editable" :editor="editor" v-slot="{ commands, isActive }")
+      VToolbar(color="primary" dark dense flat)
+        VMenu
           template(v-slot:activator="{ on }")
-            v-btn(
+            VBtn(
               icon
               v-on="on"
               :input-value="isActive.heading()"
             )
-              v-icon mdi-format-title
+              VIcon mdi-format-title
 
-          v-list
-            v-list-item(
+          VList
+            VListItem(
               :input-value="isActive.heading({ level: 1 })"
               @click="commands.heading({ level: 1 })"
             )
-              v-list-item-title Heading 1
+              VListItemTitle Heading 1
 
-            v-list-item(
+            VListItem(
               :input-value="isActive.heading({ level: 2 })"
               @click="commands.heading({ level: 2 })"
             )
-              v-list-item-title Heading 2
+              VListItemTitle Heading 2
 
-            v-list-item(
+            VListItem(
               :input-value="isActive.heading({ level: 3 })"
               @click="commands.heading({ level: 3 })"
             )
-              v-list-item-title Heading 3
+              VListItemTitle Heading 3
 
-        v-divider.mx-2(vertical)
+        VDivider.mx-2(vertical)
 
-        v-btn(icon :input-value="isActive.bold()" @click="commands.bold")
-          v-icon mdi-format-bold
+        VBtn(icon :input-value="isActive.bold()" @click="commands.bold")
+          VIcon mdi-format-bold
 
-        v-btn(icon :input-value="isActive.italic()" @click="commands.italic")
-          v-icon mdi-format-italic
+        VBtn(icon :input-value="isActive.italic()" @click="commands.italic")
+          VIcon mdi-format-italic
 
-        v-btn(icon :input-value="isActive.strike()" @click="commands.strike")
-          v-icon mdi-format-strikethrough
+        VBtn(icon :input-value="isActive.strike()" @click="commands.strike")
+          VIcon mdi-format-strikethrough
 
-        v-divider.mx-2(vertical)
+        VDivider.mx-2(vertical)
 
-        v-btn(icon :input-value="isActive.horizontal_rule()" @click="commands.horizontal_rule")
-          v-icon mdi-minus
+        VBtn(icon :input-value="isActive.horizontal_rule()" @click="commands.horizontal_rule")
+          VIcon mdi-minus
 
-        v-btn(icon :input-value="isActive.blockquote()" @click="commands.blockquote")
-          v-icon mdi-format-quote-close
+        VBtn(icon :input-value="isActive.blockquote()" @click="commands.blockquote")
+          VIcon mdi-format-quote-close
 
-        v-btn(icon :input-value="isActive.bullet_list()" @click="commands.bullet_list")
-          v-icon mdi-format-list-bulleted
+        VBtn(icon :input-value="isActive.bullet_list()" @click="commands.bullet_list")
+          VIcon mdi-format-list-bulleted
 
-        v-btn(icon :input-value="isActive.ordered_list()" @click="commands.ordered_list")
-          v-icon mdi-format-list-numbered
+        VBtn(icon :input-value="isActive.ordered_list()" @click="commands.ordered_list")
+          VIcon mdi-format-list-numbered
 
-        //v-btn(icon :input-value="isActive.todo_list()" @click="commands.todo_list") // [1]
-        //  v-icon mdi-format-list-checkbox // [1]
+        //VBtn(icon :input-value="isActive.todo_list()" @click="commands.todo_list") // [1]
+        //  VIcon mdi-format-list-checkbox // [1]
 
-        v-divider.mx-2(vertical)
+        // VDivider.mx-2(vertical)
 
-        //v-btn(icon :input-value="isActive.table()" @click="commands.createTable({rowsCount: 3, colsCount: 3, withHeaderRow: false })")
-        //  v-icon mdi-table
+        //VBtn(icon :input-value="isActive.table()" @click="commands.createTable({rowsCount: 3, colsCount: 3, withHeaderRow: false })")
+        //  VIcon mdi-table
 
         // rte-image-dialog(:command="commands.image")
 
-        //v-btn(icon :input-value="isActive.image()" @click="commands.image")
-        //  v-icon mdi-image
+        //VBtn(icon :input-value="isActive.image()" @click="commands.image")
+        //  VIcon mdi-image
 
-        //v-btn(icon :input-value="isActive.link()" @click="commands.link")
-        //  v-icon mdi-link
+        //VBtn(icon :input-value="isActive.link()" @click="commands.link")
+        //  VIcon mdi-link
 
-        v-divider.mx-2(vertical)
+        VDivider.mx-2(vertical)
 
-        v-btn(icon :input-value="isActive.code()" @click="commands.code")
-          v-icon mdi-code-tags
+        VBtn(icon :input-value="isActive.code()" @click="commands.code")
+          VIcon mdi-code-tags
 
-        v-btn(icon :input-value="isActive.code_block()" @click="commands.code_block")
-          v-icon mdi-code-brackets
+        VBtn(icon :input-value="isActive.code_block()" @click="commands.code_block")
+          VIcon mdi-code-brackets
 
-        v-divider.mx-2(vertical)
+        VDivider.mx-2(vertical)
 
-        v-btn(icon @click="commands.undo")
-          v-icon mdi-undo
+        VBtn(icon @click="commands.undo")
+          VIcon mdi-undo
 
-        v-btn(icon @click="commands.redo")
-          v-icon mdi-redo
+        VBtn(icon @click="commands.redo")
+          VIcon mdi-redo
 
-    v-container
-      editor-menu-bubble(v-if="editable" :editor="editor" keep-in-bounds v-slot="{ commands, isActive, getMarkAttrs, menu }")
+    VContainer
+      EditorMenuBubble(v-if="editable" :editor="editor" keep-in-bounds v-slot="{ commands, isActive, getMarkAttrs, menu }")
         .menububble(
           :class="{ 'is-active': menu.isActive }"
           :style="`left: ${menu.left}px; bottom: ${menu.bottom}px;`"
         )
-          v-btn(icon dark :input-value="isActive.bold()" @click="commands.bold")
-            v-icon mdi-format-bold
+          VBtn(icon dark :input-value="isActive.bold()" @click="commands.bold")
+            VIcon mdi-format-bold
 
-          v-btn(icon dark :input-value="isActive.italic()" @click="commands.italic")
-            v-icon mdi-format-italic
+          VBtn(icon dark :input-value="isActive.italic()" @click="commands.italic")
+            VIcon mdi-format-italic
 
-          v-btn(icon dark :input-value="isActive.strike()" @click="commands.strike")
-            v-icon mdi-format-strikethrough
+          VBtn(icon dark :input-value="isActive.strike()" @click="commands.strike")
+            VIcon mdi-format-strikethrough
 
-          v-btn(icon dark :input-value="isActive.code()" @click="commands.code")
-            v-icon mdi-code-tags
+          VBtn(icon dark :input-value="isActive.code()" @click="commands.code")
+            VIcon mdi-code-tags
 
-          v-form(v-if="linkMenuIsActive" @submit.prevent="setLinkUrl(commands.link, linkUrl)")
-            v-text-field.ma-0.pa-0(
+          VForm(v-if="linkMenuIsActive" @submit.prevent="setLinkUrl(commands.link, linkUrl)")
+            VTextField.ma-0.pa-0(
               label="URL"
               dark
               dense
@@ -122,41 +122,41 @@ div.mb-4
             )
 
           template(v-else)
-            v-btn(icon dark :input-value="isActive.link()" @click="showLinkMenu(getMarkAttrs('link'))")
-              v-icon mdi-link
+            VBtn(icon dark :input-value="isActive.link()" @click="showLinkMenu(getMarkAttrs('link'))")
+              VIcon mdi-link
 
-      editor-floating-menu(v-if="editable" :editor="editor" v-slot="{ commands, isActive, getMarkAttrs, menu }")
+      EditorFloatingMenu(v-if="editable" :editor="editor" v-slot="{ commands, isActive, getMarkAttrs, menu }")
         .floating-menu(
           :class="{ 'is-active': menu.isActive }"
           :style="`top: ${menu.top}px`"
         )
-          v-btn(icon small :input-value="isActive.heading({ level: 1 })" @click="commands.heading({ level: 1 })")
-            v-icon mdi-format-header-1
+          VBtn(icon small :input-value="isActive.heading({ level: 1 })" @click="commands.heading({ level: 1 })")
+            VIcon mdi-format-header-1
 
-          v-btn(icon small :input-value="isActive.heading({ level: 2 })" @click="commands.heading({ level: 2 })")
-            v-icon mdi-format-header-2
+          VBtn(icon small :input-value="isActive.heading({ level: 2 })" @click="commands.heading({ level: 2 })")
+            VIcon mdi-format-header-2
 
-          v-btn(icon small :input-value="isActive.heading({ level: 3 })" @click="commands.heading({ level: 3 })")
-            v-icon mdi-format-header-3
+          VBtn(icon small :input-value="isActive.heading({ level: 3 })" @click="commands.heading({ level: 3 })")
+            VIcon mdi-format-header-3
 
-          v-divider.mx-2(vertical)
+          VDivider.mx-2(vertical)
 
-          v-btn(icon :input-value="isActive.horizontal_rule()" @click="commands.horizontal_rule")
-            v-icon mdi-minus
+          VBtn(icon :input-value="isActive.horizontal_rule()" @click="commands.horizontal_rule")
+            VIcon mdi-minus
 
-          v-btn(icon :input-value="isActive.blockquote()" @click="commands.blockquote")
-            v-icon mdi-format-quote-close
+          VBtn(icon :input-value="isActive.blockquote()" @click="commands.blockquote")
+            VIcon mdi-format-quote-close
 
-          v-divider.mx-2(vertical)
+          VDivider.mx-2(vertical)
 
           // rte-image-dialog(:command="commands.image")
 
-          // v-divider.mx-2(vertical)
+          // VDivider.mx-2(vertical)
 
-          v-btn(icon :input-value="isActive.code_block()" @click="commands.code_block")
-            v-icon mdi-code-brackets
+          VBtn(icon :input-value="isActive.code_block()" @click="commands.code_block")
+            VIcon mdi-code-brackets
 
-      editor-content.rte-content(:editor="editor" v-model="inputVal")
+      EditorContent.rte-content(:editor="editor" v-model="inputVal")
 </template>
 
 <script>
@@ -190,7 +190,7 @@ export default {
   props: {
     label: String,
     value: {
-      type: [Object, String],
+      type: String,
       required: true
     },
     editable: {
@@ -269,10 +269,10 @@ export default {
         })
       ],
       onUpdate: ({ getJSON, getHTML }) => {
-        const json = getJSON()
-        // const html = getHTML()
+        // const json = getJSON()
+        const html = getHTML()
         // const newValue = { json, html }
-        this.$emit('input', json)
+        this.$emit('input', html)
       },
       content: this.inputVal
     })

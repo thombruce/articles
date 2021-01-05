@@ -13,7 +13,10 @@ export class Database extends Dexie {
   }
 
   async getArticles () {
-    const articles = await this.articles.toArray()
+    const articles = await this.articles
+      .orderBy('updatedAt')
+      .reverse()
+      .toArray()
     return articles
   }
 

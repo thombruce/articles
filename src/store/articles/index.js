@@ -11,7 +11,9 @@ const state = () => ({
 
 const getters = {
   all: (state) => {
-    return Object.values(state.list)
+    return Object.values(state.list).sort((a, b) => {
+      return b.updatedAt - a.updatedAt
+    })
   },
   find: (state) => (id) => {
     return state.list[id]

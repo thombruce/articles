@@ -1,25 +1,22 @@
 <template lang="pug">
   div(class="templates")
-    VContainer
-      h2 Articles
+    VNavigationDrawer.col-2(absolute clipped permanent)
+      VList
+        VListItemGroup
+          VListItem(to="/articles/new" link)
+            VListItemContent
+              VListItemTitle New Article
 
-      RouterLink(:to="{ name: 'NewArticle' }") New article
+          VListItem(v-for="article in articles" :key="article.id" :to="{ name: 'EditArticle', params: { id: article.id } }" link)
+            VListItemContent
+              VListItemTitle {{ htmlToString(article.content) }}
 
-      VDataTable(:headers="headers" :items="articles" :items-per-page="5")
-        template(v-slot:item.content="{ item }")
-          // VRichTextEditor(v-model="item.content" :editable="false")
-          | {{ item.content }}
-
-        template(v-slot:item.actions="{ item }")
-          VBtn(icon :to="{ name: 'EditArticle', params: { id: item.id } }")
-            VIcon(small) mdi-pencil
-
-          VBtn(icon @click="destroy(item)")
-            VIcon(small) mdi-delete
+    VContainer.col-10.offset-2
+      RouterView
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 
 // import VRichTextEditor from '@/components/v-rich-text-editor'
 
@@ -41,9 +38,10 @@ export default {
     })
   },
   methods: {
-    ...mapActions('articles', [
-      'destroy'
-    ])
+    htmlToString (htmlString) {
+      const doc = new DOMParser().parseFromString(htmlString, 'text/html')
+      return doc.body.textContent || ''
+    }
   }
 }
 </script>
