@@ -1,8 +1,6 @@
 <template lang="pug">
 div
   VContainer
-    h2 New Article
-
     ArticleForm(:article="article" :submit="create")
 
     RouterLink(:to="{ name: 'Articles' }") Back

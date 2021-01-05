@@ -1,8 +1,6 @@
 <template lang="pug">
 div
   VContainer
-    h2 Edit Article
-
     ArticleForm(:key="article.id" :article="article" :submit="update")
 
     .my-3

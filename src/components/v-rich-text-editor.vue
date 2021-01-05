@@ -4,7 +4,7 @@ div.mb-4
 
   VCard
     EditorMenuBar(v-if="editable" :editor="editor" v-slot="{ commands, isActive }")
-      VToolbar(color="primary" dark dense flat)
+      VToolbar(dense flat)
         VMenu
           template(v-slot:activator="{ on }")
             VBtn(
