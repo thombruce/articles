@@ -4,6 +4,7 @@
       absolute
       clipped
       permanent
+      width="100%"
     )
       VList
         VListItemGroup
