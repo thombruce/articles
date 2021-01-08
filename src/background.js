@@ -35,7 +35,6 @@ async function createWindow () {
   // Open all links in external browser
   /* https://github.com/electron/electron/issues/1344#issuecomment-171516261 */
   const { shell } = require('electron')
-  
   win.webContents.on('new-window', function(event, url){
     event.preventDefault()
     shell.openExternal(url)
