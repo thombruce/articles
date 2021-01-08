@@ -43,10 +43,8 @@ const actions = {
       ...{ updatedAt: timestamp }
     }
 
-    return await db.updateArticle(article.id, article).then(() => {
-      commit('insert', article)
-      return getters.find(article.id)
-    })
+    commit('updateArticle', article)
+    return getters.find(article.id)
   },
 
   async destroy ({ commit }, id) {

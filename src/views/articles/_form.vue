@@ -1,8 +1,6 @@
 <template lang="pug">
-VForm(ref="form" :model="article" @submit.prevent="onSubmit()")
-  VEditor(v-model="article.content")
-
-  VBtn(color="primary" type="submit") Submit
+VForm(ref="form" :model="article" @submit.prevent)
+  VEditor(v-model="article.content" @input="onSubmit()")
 </template>
 
 <script>
@@ -23,7 +21,6 @@ export default {
   methods: {
     onSubmit () {
       this.submit(this.article)
-      this.$router.push({ name: 'Articles' })
     },
     ...mapActions('editor', [
       'initialize',

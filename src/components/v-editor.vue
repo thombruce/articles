@@ -38,7 +38,9 @@ export default {
 
   watch: {
     content () {
-      this.$emit('input', this.content)
+      if (this.content !== this.value) {
+        this.$emit('input', this.content)
+      }
     }
   }
 }
