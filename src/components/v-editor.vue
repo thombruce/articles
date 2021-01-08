@@ -7,7 +7,7 @@ VCard
 
     VEditorFloatingMenu
 
-    VEditorContent.rte-content
+    VEditorContent
 </template>
 
 <script>
