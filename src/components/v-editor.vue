@@ -1,6 +1,6 @@
 <template lang="pug">
 VCard
-  VEditorMenuBar
+  // VEditorMenuBar
 
   VContainer
     VEditorMenuBubble

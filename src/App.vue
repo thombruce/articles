@@ -1,6 +1,5 @@
 <template lang="pug">
   VApp
-
     VNavigationDrawer(app temporary v-model="drawer")
       VList(nav)
         VListItemGroup(v-model="group")
@@ -12,10 +11,15 @@
             VListItemContent
               VListItemTitle New Article
 
+    VEditorAppBar(v-if="editor")
+
     VAppBar(
+      v-else
       app
       color="primary"
       dark
+      flat
+      dense
     )
       VAppBarNavIcon(@click.stop="drawer = !drawer")
 
@@ -36,12 +40,17 @@
 import VDarkmodeToggle from './components/controls/v-darkmode-toggle'
 import VFullscreenToggle from './components/controls/v-fullscreen-toggle'
 
+import VEditorAppBar from './components/local/v-editor-app-bar.vue'
+
+import { mapState } from 'vuex'
+
 export default {
   name: 'App',
 
   components: {
     VDarkmodeToggle,
-    VFullscreenToggle
+    VFullscreenToggle,
+    VEditorAppBar
   },
 
   data () {
@@ -49,6 +58,12 @@ export default {
       drawer: false,
       group: null
     }
+  },
+
+  computed: {
+    ...mapState('editor', {
+      editor: 'editor'
+    })
   },
 
   watch: {

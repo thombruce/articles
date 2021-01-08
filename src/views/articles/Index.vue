@@ -9,13 +9,6 @@
       VList
         VListItemGroup
           VListItem(
-            to="/articles/new"
-            link
-          )
-            VListItemContent
-              VListItemTitle New Article
-
-          VListItem(
             v-for="article in articles"
             :key="article.id"
             :to="{ name: 'EditArticle', params: { id: article.id } }"
