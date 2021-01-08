@@ -25,7 +25,7 @@ const routes = [
       {
         path: '/articles/:id',
         name: 'EditArticle',
-        component: () => import(/* webpackChunkName: "showArticle" */ '../views/articles/Edit.vue')
+        component: () => import(/* webpackChunkName: "editArticle" */ '../views/articles/Edit.vue')
       }
     ]
   }

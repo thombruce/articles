@@ -33,8 +33,6 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-
 import VDarkmodeToggle from './components/controls/v-darkmode-toggle'
 import VFullscreenToggle from './components/controls/v-fullscreen-toggle'
 
@@ -53,20 +51,10 @@ export default {
     }
   },
 
-  created () {
-    this.loadDb()
-  },
-
   watch: {
     group () {
       this.drawer = false
     }
-  },
-
-  methods: {
-    ...mapActions('articles', [
-      'loadDb'
-    ])
   }
 }
 </script>

@@ -33,34 +33,31 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
-// import VRichTextEditor from '@/components/v-rich-text-editor'
+import { mapActions } from 'vuex'
 
 export default {
-  // components: {
-  //   VRichTextEditor
-  // },
   data () {
     return {
-      headers: [
-        { text: 'Content', value: 'content' },
-        { text: 'Actions', value: 'actions', sortable: false }
-      ]
+      articles: null
     }
   },
-  computed: {
-    ...mapGetters('articles', {
-      articles: 'all'
-    })
-  },
+
   methods: {
+    ...mapActions('articles', [
+      'index'
+    ]),
     htmlToString (htmlString) {
       const doc = new DOMParser().parseFromString(htmlString, 'text/html')
-      return doc.body.children[0].textContent || 'Untitled Note'
-      // TODO: Refactor to consider documents which begin with non-text element.
-      //       Iterate over the `children` collection to find first node with textContent.
+      if (doc.body.children[0]) {
+        return doc.body.children[0].textContent || 'Untitled Note'
+      } else {
+        return 'Untitled Note'
+      }
     }
+  },
+
+  async mounted () {
+    this.articles = await this.index()
   }
 }
 </script>

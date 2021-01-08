@@ -20,10 +20,10 @@ export class Database extends Dexie {
     return articles
   }
 
-  // async getArticle (id) {
-  //   const article = await this.articles.get(id)
-  //   return article
-  // }
+  async getArticle (id) {
+    const article = await this.articles.get(id)
+    return article
+  }
 
   addArticle (data) {
     return this.articles.add(data)

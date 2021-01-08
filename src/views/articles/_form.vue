@@ -1,26 +1,42 @@
 <template lang="pug">
 VForm(ref="form" :model="article" @submit.prevent="onSubmit()")
-  VRichTextEditor(v-model="article.content" :editable="true")
+  VEditor(v-model="article.content")
 
   VBtn(color="primary" type="submit") Submit
 </template>
 
 <script>
-import VRichTextEditor from '@/components/v-rich-text-editor'
+import { mapActions } from 'vuex'
+
+import VEditor from '@/components/v-editor'
 
 export default {
   props: [
     'article',
     'submit'
   ],
+
   components: {
-    VRichTextEditor
+    VEditor
   },
+
   methods: {
     onSubmit () {
-      this.submit({ id: this.article.id, data: this.article })
+      this.submit(this.article)
       this.$router.push({ name: 'Articles' })
-    }
+    },
+    ...mapActions('editor', [
+      'initialize',
+      'teardown'
+    ])
+  },
+
+  mounted () {
+    this.initialize(this.article.content)
+  },
+
+  beforeDestroy () {
+    this.teardown()
   }
 }
 </script>

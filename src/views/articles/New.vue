@@ -1,31 +1,18 @@
-<template lang="pug">
-div
-  VContainer
-    ArticleForm(:article="article" :submit="create")
-
-    RouterLink(:to="{ name: 'Articles' }") Back
-</template>
-
 <script>
-import ArticleForm from './_form.vue'
-
 import { mapActions } from 'vuex'
 
 export default {
-  components: {
-    ArticleForm
-  },
-  data () {
-    return {
-      article: {
-        content: ''
-      }
-    }
-  },
+  render: () => null,
+
   methods: {
     ...mapActions('articles', [
-      'create'
+      'new'
     ])
+  },
+
+  async created () {
+    const article = await this.new()
+    this.$router.replace({ name: 'EditArticle', params: { id: article.id } })
   }
 }
 </script>

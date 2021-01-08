@@ -1,7 +1,7 @@
 <template lang="pug">
 div
   VContainer
-    ArticleForm(:key="article.id" :article="article" :submit="update")
+    ArticleForm(v-if="article" :key="article.id" :article="article" :submit="update")
 
     .my-3
       VBtn(color="error" small @click="onDestroy()") Delete
@@ -12,29 +12,38 @@ div
 <script>
 import ArticleForm from './_form.vue'
 
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   components: {
     ArticleForm
   },
-  computed: {
-    ...mapGetters('articles', {
-      find: 'find'
-    }),
-    article () {
-      return this.find(this.$route.params.id)
+
+  data () {
+    return {
+      article: null
     }
   },
+
   methods: {
     ...mapActions('articles', [
+      'show',
       'update',
       'destroy'
     ]),
     onDestroy () {
-      this.destroy(this.article)
+      this.destroy(this.article.id)
       this.$router.push({ name: 'Articles' })
     }
+  },
+
+  async mounted () {
+    this.article = await this.show(this.$route.params.id)
+  },
+
+  async beforeRouteUpdate (to, from, next) {
+    this.article = await this.show(to.params.id)
+    next()
   }
 }
 </script>
