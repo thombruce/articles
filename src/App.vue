@@ -7,7 +7,7 @@
             VListItemContent
               VListItemTitle Home
 
-          VListItem(to="/articles/new" link)
+          VListItem(@click="newArticle()" link)
             VListItemContent
               VListItemTitle New Article
 
@@ -42,7 +42,7 @@ import VFullscreenToggle from './components/controls/v-fullscreen-toggle'
 
 import VEditorAppBar from './components/local/v-editor-app-bar.vue'
 
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'App',
@@ -64,6 +64,16 @@ export default {
     ...mapState('editor', {
       editor: 'editor'
     })
+  },
+
+  methods: {
+    ...mapActions('articles', [
+      'new'
+    ]),
+    async newArticle () {
+      const article = await this.new()
+      this.$router.push({ name: 'EditArticle', params: { id: article.id } })
+    }
   },
 
   watch: {
