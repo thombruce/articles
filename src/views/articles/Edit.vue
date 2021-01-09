@@ -31,19 +31,34 @@ export default {
       'update',
       'destroy'
     ]),
+    ...mapActions('editor', [
+      'initializeEditor',
+      'setEditorContent',
+      'teardownEditor'
+    ]),
     onDestroy () {
       this.destroy(this.article.id)
       this.$router.push({ name: 'Articles' })
     }
   },
 
+  created () {
+    this.initializeEditor()
+  },
+
   async mounted () {
     this.article = await this.show(this.$route.params.id)
+    this.setEditorContent(this.article.content)
   },
 
   async beforeRouteUpdate (to, from, next) {
     this.article = await this.show(to.params.id)
+    this.setEditorContent(this.article.content)
     next()
+  },
+
+  beforeDestroy () {
+    this.teardownEditor()
   }
 }
 </script>

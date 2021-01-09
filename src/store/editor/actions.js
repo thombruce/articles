@@ -26,7 +26,7 @@ import {
 } from 'tiptap-extensions'
 
 const actions = {
-  initialize ({ commit }, content) {
+  initializeEditor ({ commit }, content) {
     const editor = new Editor({
       extensions: [
         new Blockquote(),
@@ -60,7 +60,11 @@ const actions = {
     commit('init', editor)
   },
 
-  teardown ({ commit }) {
+  setEditorContent ({ state }, content) {
+    state.editor.setContent(content)
+  },
+
+  teardownEditor ({ commit }) {
     commit('deinit')
   }
 }

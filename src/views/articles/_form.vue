@@ -4,8 +4,6 @@ VForm(ref="form" :model="article" @submit.prevent)
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-
 import VEditor from '@/components/v-editor'
 
 export default {
@@ -21,19 +19,7 @@ export default {
   methods: {
     onSubmit () {
       this.submit(this.article)
-    },
-    ...mapActions('editor', [
-      'initialize',
-      'teardown'
-    ])
-  },
-
-  mounted () {
-    this.initialize(this.article.content)
-  },
-
-  beforeDestroy () {
-    this.teardown()
+    }
   }
 }
 </script>
