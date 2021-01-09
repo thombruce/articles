@@ -42,7 +42,6 @@ export default {
   },
 
   async beforeRouteUpdate (to, from, next) {
-    this.article = null
     this.article = await this.show(to.params.id)
     next()
   }
