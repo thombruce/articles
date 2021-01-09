@@ -1,7 +1,7 @@
 <template lang="pug">
 EditorMenuBar(:editor="editor" v-slot="{ commands, isActive }")
   VAppBar.d-flex.justify-center(app flat dense)
-    VBtn(icon :to="{ name: 'NewArticle' }")
+    VBtn(icon @click="newArticle()")
       VIcon mdi-plus-box
 
     VDivider.mx-2(vertical)
@@ -95,7 +95,7 @@ EditorMenuBar(:editor="editor" v-slot="{ commands, isActive }")
 <script>
 import { EditorMenuBar } from 'tiptap'
 
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   components: {
@@ -106,6 +106,16 @@ export default {
     ...mapState('editor', {
       editor: 'editor'
     })
+  },
+
+  methods: {
+    ...mapActions('articles', [
+      'new'
+    ]),
+    async newArticle () {
+      const article = await this.new()
+      this.$router.push({ name: 'EditArticle', params: { id: article.id } })
+    }
   }
 }
 </script>
