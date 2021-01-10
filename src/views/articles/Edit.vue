@@ -2,11 +2,6 @@
 div
   VContainer
     ArticleForm(v-if="article" :key="article.id" :article="article" :submit="update")
-
-    .my-3
-      VBtn(color="error" small @click="onDestroy()") Delete
-
-    RouterLink(:to="{ name: 'Articles' }") Back
 </template>
 
 <script>
@@ -28,18 +23,13 @@ export default {
   methods: {
     ...mapActions('articles', [
       'show',
-      'update',
-      'destroy'
+      'update'
     ]),
     ...mapActions('editor', [
       'initializeEditor',
       'setEditorContent',
       'teardownEditor'
-    ]),
-    onDestroy () {
-      this.destroy(this.article.id)
-      this.$router.push({ name: 'Articles' })
-    }
+    ])
   },
 
   created () {

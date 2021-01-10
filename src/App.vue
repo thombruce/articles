@@ -82,4 +82,12 @@ export default {
     }
   }
 }
+
+// TODO: A lot of the template is now redundant, since we
+//       now never render anything without an article.
+//       If no ID is given in params, we navigate to latest.
+//       If none exist, we create one and navigate to it.
+//       This means that the default nav bar and the
+//       navigation drawer are never shown. We should
+//       move their functions elsewhere.
 </script>

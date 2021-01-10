@@ -7,6 +7,10 @@ const getters = {
 
   find: (state, _getters, _rootState, _rootGetters) => (id) => {
     return state.list[id]
+  },
+
+  latest: (_state, getters, _rootState, _rootGetters) => {
+    return getters.all[0]
   }
 }
 

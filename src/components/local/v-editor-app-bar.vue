@@ -90,12 +90,17 @@ EditorMenuBar(:editor="editor" v-slot="{ commands, isActive }")
 
     VBtn(icon @click="commands.redo")
       VIcon mdi-redo
+
+    VDivider.mx-2(vertical)
+
+    VBtn(icon @click="destroyArticle()")
+      VIcon mdi-delete
 </template>
 
 <script>
 import { EditorMenuBar } from 'tiptap'
 
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
   components: {
@@ -105,15 +110,24 @@ export default {
   computed: {
     ...mapState('editor', {
       editor: 'editor'
+    }),
+    ...mapGetters('articles', {
+      latest: 'latest'
     })
   },
 
   methods: {
     ...mapActions('articles', [
-      'new'
+      'new',
+      'destroy'
     ]),
     async newArticle () {
       const article = await this.new()
+      this.$router.push({ name: 'EditArticle', params: { id: article.id } })
+    },
+    async destroyArticle () {
+      await this.destroy(this.$route.params.id)
+      const article = this.latest || await this.new()
       this.$router.push({ name: 'EditArticle', params: { id: article.id } })
     }
   }

@@ -30,18 +30,25 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   computed: {
     ...mapGetters('articles', {
-      articles: 'all'
+      articles: 'all',
+      latest: 'latest'
     })
   },
 
   methods: {
     ...mapActions('articles', [
-      'index'
+      'index',
+      'new'
     ])
   },
 
-  mounted () {
-    this.index()
+  async created () {
+    await this.index()
+
+    if (!this.$route.params.id) {
+      const article = this.latest || await this.new()
+      this.$router.replace({ name: 'EditArticle', params: { id: article.id } })
+    }
   }
 }
 </script>

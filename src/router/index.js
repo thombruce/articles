@@ -26,8 +26,10 @@ const routes = [
   }
 ]
 
+const userAgent = navigator.userAgent.toLowerCase()
+
 const router = new VueRouter({
-  mode: 'hash',
+  mode: (userAgent.indexOf(' electron/') > -1) ? 'hash' : 'history',
   base: process.env.BASE_URL,
   routes
 })
