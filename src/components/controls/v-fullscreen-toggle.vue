@@ -1,5 +1,5 @@
 <template lang="pug">
-v-btn.d-none.d-md-block(@click="fullScreenMode = !fullScreenMode" icon)
+v-btn(@click="fullScreenMode = !fullScreenMode" icon)
   v-icon(v-if="!fullScreenMode") mdi-arrow-expand
   v-icon(v-else) mdi-arrow-collapse
 </template>

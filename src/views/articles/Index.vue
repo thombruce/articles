@@ -1,10 +1,9 @@
 <template lang="pug">
-  div(class="templates")
-    VNavigationDrawer.col-4.col-md-3.col-lg-2.pa-0(
-      absolute
+  VApp
+    VNavigationDrawer(
+      app
       clipped
       permanent
-      width="100%"
     )
       VList
         VListItemGroup
@@ -20,18 +19,41 @@
               div
                 time(:datetime="article.updatedAt") {{ article.updatedAt | formatDate }}
 
-    VContainer.col-8.offset-4.col-md-9.offset-md-3.col-lg-10.offset-lg-2
-      RouterView
+      template(v-slot:append)
+        .row.pa-2
+          .col-6.d-flex.justify-center
+            VDarkmodeToggle
+          .col-6.d-flex.justify-center
+            VFullscreenToggle
+
+    VEditorAppBar(v-if="editor")
+
+    VMain
+      VContainer
+        RouterView
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
+
+import VDarkmodeToggle from '@/components/controls/v-darkmode-toggle'
+import VFullscreenToggle from '@/components/controls/v-fullscreen-toggle'
+import VEditorAppBar from '@/components/local/v-editor-app-bar.vue'
 
 export default {
+  components: {
+    VDarkmodeToggle,
+    VFullscreenToggle,
+    VEditorAppBar
+  },
+
   computed: {
     ...mapGetters('articles', {
       articles: 'all',
       latest: 'latest'
+    }),
+    ...mapState('editor', {
+      editor: 'editor'
     })
   },
 

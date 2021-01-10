@@ -1,6 +1,6 @@
 <template lang="pug">
 EditorMenuBar(:editor="editor" v-slot="{ commands, isActive }")
-  VAppBar.d-flex.justify-center(app flat dense)
+  VAppBar.d-flex.justify-center(app flat dense clipped-left)
     VBtn(icon @click="newArticle()")
       VIcon mdi-plus-box
 
