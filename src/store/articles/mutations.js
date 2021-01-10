@@ -14,7 +14,7 @@ const mutations = {
     Vue.set(state.list, payload.id, payload)
   },
 
-  updateArticle (state, payload) {
+  update (state, payload) {
     Vue.set(state.list, payload.id, payload)
   },
 

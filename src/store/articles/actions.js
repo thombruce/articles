@@ -43,7 +43,7 @@ const actions = {
       ...{ updatedAt: timestamp }
     }
 
-    commit('updateArticle', article)
+    commit('update', article)
     return getters.find(article.id)
   },
 

@@ -9,8 +9,8 @@ const save = _.debounce(function (id, content) {
 }, 1000, { maxWait: 3000 })
 
 const autosave = store => {
-  store.subscribe((mutation, state) => {
-    if (mutation.type === 'articles/updateArticle') {
+  store.subscribe((mutation, _state) => {
+    if (mutation.type === 'articles/update') {
       save(mutation.payload.id, mutation.payload)
     }
   })
