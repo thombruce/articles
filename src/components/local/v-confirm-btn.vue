@@ -1,19 +1,23 @@
 <template lang="pug">
   VDialog(v-model="dialog" width="500")
     template(v-slot:activator="{ on, attrs }")
-      VBtn(
-        icon
-        v-bind="attrs"
-        v-on="on"
-      )
-        VIcon mdi-delete
+      slot(name="button" :on="on" :attrs="attrs")
+        VBtn(
+          text
+          v-bind="attrs"
+          v-on="on"
+        )
+          | Click
 
     VCard
-      VCardTitle.headline
-        | Are you sure?
-      VCardText
-        | If you delete this article, you won't be able to retrieve it.
+      slot(name="dialog")
+        VCardTitle.headline
+          | Are you sure?
+        VCardText
+          | You won't be able to undo this action.
+
       VDivider
+
       VCardActions
         VSpacer
         VBtn(
@@ -25,7 +29,7 @@
         VBtn(
           color="error"
           text
-          @click="deleteAction()"
+          @click="confirmAction()"
         )
           | Confirm
 </template>
@@ -43,7 +47,7 @@ export default {
   },
 
   methods: {
-    deleteAction () {
+    confirmAction () {
       this.action()
       this.dialog = false
     }

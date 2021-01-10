@@ -93,7 +93,19 @@ EditorMenuBar(:editor="editor" v-slot="{ commands, isActive }")
 
     VDivider.mx-2(vertical)
 
-    VDeleteBtn(:action="destroyArticle")
+    VConfirmBtn(:action="destroyArticle")
+      template(#button="{ on, attrs }")
+        VBtn.error--text(
+          icon
+          v-bind="attrs"
+          v-on="on"
+        )
+          VIcon mdi-delete
+      template(#dialog)
+        VCardTitle.headline
+          | Are you sure?
+        VCardText
+          | If you delete this article, you won't be able to retrieve it.
 </template>
 
 <script>
@@ -101,12 +113,12 @@ import { EditorMenuBar } from 'tiptap'
 
 import { mapState, mapGetters, mapActions } from 'vuex'
 
-import VDeleteBtn from './v-delete-btn.vue'
+import VConfirmBtn from './v-confirm-btn.vue'
 
 export default {
   components: {
     EditorMenuBar,
-    VDeleteBtn
+    VConfirmBtn
   },
 
   computed: {
