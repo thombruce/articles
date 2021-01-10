@@ -93,8 +93,7 @@ EditorMenuBar(:editor="editor" v-slot="{ commands, isActive }")
 
     VDivider.mx-2(vertical)
 
-    VBtn(icon @click="destroyArticle()")
-      VIcon mdi-delete
+    VDeleteBtn(:action="destroyArticle")
 </template>
 
 <script>
@@ -102,9 +101,12 @@ import { EditorMenuBar } from 'tiptap'
 
 import { mapState, mapGetters, mapActions } from 'vuex'
 
+import VDeleteBtn from './v-delete-btn.vue'
+
 export default {
   components: {
-    EditorMenuBar
+    EditorMenuBar,
+    VDeleteBtn
   },
 
   computed: {
