@@ -5,9 +5,12 @@ import { Database } from '@/database.js'
 const db = new Database()
 
 const actions = {
-  async index ({ commit, getters }) {
-    const articles = await db.getArticles()
-    commit('init', articles)
+  async index ({ commit, getters }, params) {
+    const offset = params && params.offset
+    const limit = params && params.limit
+
+    const articles = await db.getArticles(offset, limit)
+    commit('push', articles)
 
     return getters.all
   },

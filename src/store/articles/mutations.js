@@ -1,13 +1,13 @@
 import Vue from 'vue'
 
 const mutations = {
-  init (state, articles) {
+  push (state, articles) {
     articles = articles.reduce((obj, item) => {
       obj[item.id] = item
       return obj
     }, {})
 
-    state.list = articles
+    state.list = { ...state.list, ...articles }
   },
 
   insert (state, payload) {

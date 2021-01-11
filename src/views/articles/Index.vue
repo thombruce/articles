@@ -6,7 +6,11 @@
       permanent
     )
       VList
-        VListItemGroup
+        VListItemGroup(
+          v-infinite-scroll="loadMore"
+          infinite-scroll-disabled="busy"
+          infinite-scroll-distance="50"
+        )
           VListItem(
             v-for="article in articles"
             :key="article.id"
@@ -46,6 +50,12 @@ export default {
     VEditorAppBar
   },
 
+  data () {
+    return {
+      busy: false
+    }
+  },
+
   computed: {
     ...mapGetters('articles', {
       articles: 'all',
@@ -53,14 +63,22 @@ export default {
     }),
     ...mapState('editor', {
       editor: 'editor'
-    })
+    }),
+    count () {
+      return this.articles.length
+    }
   },
 
   methods: {
     ...mapActions('articles', [
       'index',
       'new'
-    ])
+    ]),
+    async loadMore () {
+      this.busy = true
+      await this.index({ offset: this.count })
+      this.busy = false
+    }
   },
 
   async created () {

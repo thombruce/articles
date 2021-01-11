@@ -12,9 +12,11 @@ export class Database extends Dexie {
     this.articles = this.table('articles')
   }
 
-  async getArticles () {
+  async getArticles (offset = 0, limit = 10) {
     const articles = await this.articles
       .orderBy('updatedAt')
+      .offset(offset)
+      .limit(limit)
       .reverse()
       .toArray()
     return articles
