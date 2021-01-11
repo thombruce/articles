@@ -1,16 +1,21 @@
 import Vue from 'vue'
 
+import { findAllByKey, truncate } from './functions'
+
 Vue.filter('formatDate', val => new Date(val).toLocaleDateString())
 
-Vue.filter('textPreview', val => {
-  const doc = new DOMParser().parseFromString(val, 'text/html')
+Vue.filter('textPreviewFromHTML', html => {
+  const doc = new DOMParser().parseFromString(html, 'text/html')
   const firstNode = doc.body.children[0]
-  const textContent = firstNode ? firstNode.textContent : null
+  const text = firstNode ? firstNode.textContent : null
 
-  if (textContent && textContent.length > 50) {
-    return textContent.substring(0, 50) + '...'
-  } else if (textContent) {
-    return textContent
-  }
+  if (text) return truncate(text, 50)
+  return 'Untitled Note'
+})
+
+Vue.filter('textPreviewFromJSON', json => {
+  const text = findAllByKey(json, 'text').join()
+
+  if (text) return truncate(text, 50)
   return 'Untitled Note'
 })

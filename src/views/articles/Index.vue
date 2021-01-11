@@ -15,7 +15,7 @@
             link
           )
             VListItemContent
-              strong {{ article.content | textPreview }}
+              strong {{ article.content | textPreviewFromJSON }}
               div
                 time(:datetime="article.updatedAt") {{ article.updatedAt | formatDate }}
 

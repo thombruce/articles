@@ -1,7 +1,7 @@
 const getters = {
   content: (state, _getters, _rootState, _rootGetters) => {
     if (state.editor) {
-      return state.editor.getHTML()
+      return state.editor.getJSON()
     }
   }
 }
