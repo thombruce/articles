@@ -13,13 +13,9 @@ import VEditorMenuBar from './editor/v-editor-menu-bar.vue'
 import VEditorMenuBubble from './editor/v-editor-menu-bubble.vue'
 import VEditorFloatingMenu from './editor/v-editor-floating-menu.vue'
 
-import { mapState, mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
-  props: [
-    'value'
-  ],
-
   components: {
     VEditorContent,
     VEditorMenuBar,
@@ -30,18 +26,7 @@ export default {
   computed: {
     ...mapState('editor', {
       editor: 'editor'
-    }),
-    ...mapGetters('editor', {
-      content: 'content'
     })
-  },
-
-  watch: {
-    content () {
-      if (this.content !== this.value) {
-        this.$emit('input', this.content)
-      }
-    }
   },
 
   methods: {

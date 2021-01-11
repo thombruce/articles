@@ -18,11 +18,11 @@ const actions = {
   async show ({ commit, getters }, id) {
     return await db.getArticle(id).then((article) => {
       commit('insert', article)
-      return getters.find(id)
+      return getters.current
     })
   },
 
-  async new ({ commit }) {
+  async new ({ commit, getters }) {
     const id = uuidv4()
     const timestamp = new Date().getTime()
     const article = {
@@ -34,20 +34,20 @@ const actions = {
 
     return await db.addArticle(article).then(() => {
       commit('insert', article)
-      return article
+      return getters.current
     })
   },
 
   async update ({ dispatch, commit, state, getters }, article) {
     const timestamp = new Date().getTime()
     article = {
-      ...getters.find(article.id),
+      ...getters.current,
       ...article,
       ...{ updatedAt: timestamp }
     }
 
     commit('update', article)
-    return getters.find(article.id)
+    return getters.current
   },
 
   async destroy ({ commit }, id) {

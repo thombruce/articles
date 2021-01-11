@@ -11,6 +11,10 @@ const getters = {
 
   latest: (_state, getters, _rootState, _rootGetters) => {
     return getters.all[0]
+  },
+
+  current: (state, getters, _rootState, _rootGetters) => {
+    return getters.find(state.currentId)
   }
 }
 

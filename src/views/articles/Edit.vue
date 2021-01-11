@@ -1,16 +1,16 @@
 <template lang="pug">
 VContainer.pa-0(fluid fill-height)
-  ArticleForm(v-if="article" :key="article.id" :article="article" :submit="update")
+  VEditor
 </template>
 
 <script>
-import ArticleForm from './_form.vue'
+import VEditor from '@/components/v-editor'
 
 import { mapActions } from 'vuex'
 
 export default {
   components: {
-    ArticleForm
+    VEditor
   },
 
   data () {
@@ -21,8 +21,7 @@ export default {
 
   methods: {
     ...mapActions('articles', [
-      'show',
-      'update'
+      'show'
     ]),
     ...mapActions('editor', [
       'initializeEditor',
