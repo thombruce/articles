@@ -29,8 +29,7 @@
     VEditorAppBar(v-if="editor")
 
     VMain
-      VContainer
-        RouterView
+      RouterView
 </template>
 
 <script>

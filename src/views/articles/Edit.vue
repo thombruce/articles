@@ -1,7 +1,6 @@
 <template lang="pug">
-div
-  VContainer
-    ArticleForm(v-if="article" :key="article.id" :article="article" :submit="update")
+VContainer.pa-0(fluid fill-height)
+  ArticleForm(v-if="article" :key="article.id" :article="article" :submit="update")
 </template>
 
 <script>

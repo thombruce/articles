@@ -1,6 +1,5 @@
 <template lang="pug">
-VForm(ref="form" :model="article" @submit.prevent)
-  VEditor(v-model="article.content" @input="onSubmit()")
+VEditor(v-model="article.content" @input="onSubmit()")
 </template>
 
 <script>
