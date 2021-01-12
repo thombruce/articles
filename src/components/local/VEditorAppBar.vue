@@ -1,6 +1,10 @@
 <template lang="pug">
 EditorMenuBar(:editor="editor" v-slot="{ commands, isActive }")
-  VAppBar.d-flex.justify-center(app flat dense clipped-left)
+  VAppBar(app flat dense clipped-left)
+    VAppBarNavIcon(@click.stop="toggleDrawer()")
+
+    VSpacer
+
     VBtn(icon @click="newArticle()")
       VIcon mdi-plus-box
 
@@ -91,7 +95,7 @@ EditorMenuBar(:editor="editor" v-slot="{ commands, isActive }")
     VBtn(icon @click="commands.redo")
       VIcon mdi-redo
 
-    VDivider.mx-2(vertical)
+    VSpacer
 
     VConfirmBtn(:action="destroyArticle")
       template(#button="{ on, attrs }")
@@ -111,7 +115,7 @@ EditorMenuBar(:editor="editor" v-slot="{ commands, isActive }")
 <script>
 import { EditorMenuBar } from 'tiptap'
 
-import { mapState, mapGetters, mapActions } from 'vuex'
+import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
 
 import VConfirmBtn from './VConfirmBtn'
 
@@ -131,6 +135,9 @@ export default {
   },
 
   methods: {
+    ...mapMutations('ui', [
+      'toggleDrawer'
+    ]),
     ...mapActions('articles', [
       'new',
       'destroy'
