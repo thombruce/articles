@@ -1,5 +1,5 @@
 // import actions from './actions'
-// import getters from './getters'
+import getters from './getters'
 import mutations from './mutations'
 
 const state = () => ({
@@ -9,7 +9,7 @@ const state = () => ({
 const ui = {
   namespaced: true,
   state,
-  // getters,
+  getters,
   // actions,
   mutations
 }
