@@ -25,9 +25,9 @@
 
       template(v-slot:append)
         .row.pa-2
-          .col-6.d-flex.justify-center
+          .col.d-flex.justify-center
             VDarkmodeToggle
-          .col-6.d-flex.justify-center
+          .col.d-flex.justify-center(v-if="!isElectron")
             VFullscreenToggle
 
     VEditorAppBar(v-if="editor")
@@ -37,6 +37,8 @@
 </template>
 
 <script>
+import isElectron from 'is-electron'
+
 import { mapState, mapGetters, mapActions } from 'vuex'
 
 import VDarkmodeToggle from '@/components/controls/VDarkmodeToggle'
@@ -66,6 +68,9 @@ export default {
     }),
     count () {
       return this.articles.length
+    },
+    isElectron () {
+      return isElectron()
     }
   },
 

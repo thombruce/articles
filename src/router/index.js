@@ -1,5 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+
+import isElectron from 'is-electron'
+
 import Articles from '../views/articles/Index.vue'
 
 Vue.use(VueRouter)
@@ -26,10 +29,8 @@ const routes = [
   }
 ]
 
-const userAgent = navigator.userAgent.toLowerCase()
-
 const router = new VueRouter({
-  mode: (userAgent.indexOf(' electron/') > -1) ? 'hash' : 'history',
+  mode: isElectron() ? 'hash' : 'history',
   base: process.env.BASE_URL,
   routes
 })
