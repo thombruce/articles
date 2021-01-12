@@ -14,7 +14,8 @@ Vue.filter('textPreviewFromHTML', html => {
 })
 
 Vue.filter('textPreviewFromJSON', json => {
-  const text = findAllByKey(json, 'text').join(' ')
+  const textNodes = findAllByKey(json, 'text')
+  const text = textNodes && textNodes.join(' ')
 
   if (text) return truncate(text, 50)
   return 'Untitled Note'
