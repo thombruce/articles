@@ -8,17 +8,15 @@
 </template>
 
 <script>
-import VEditorContent from './editor/v-editor-content.vue'
-import VEditorMenuBar from './editor/v-editor-menu-bar.vue'
-import VEditorMenuBubble from './editor/v-editor-menu-bubble.vue'
-import VEditorFloatingMenu from './editor/v-editor-floating-menu.vue'
+import VEditorContent from './editor/VEditorContent.vue'
+import VEditorMenuBubble from './editor/VEditorMenuBubble.vue'
+import VEditorFloatingMenu from './editor/VEditorFloatingMenu.vue'
 
 import { mapState } from 'vuex'
 
 export default {
   components: {
     VEditorContent,
-    VEditorMenuBar,
     VEditorMenuBubble,
     VEditorFloatingMenu
   },
@@ -38,8 +36,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import '@/assets/v-editor';
-
 .editor-sheet {
   cursor: text;
 }

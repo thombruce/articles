@@ -1,8 +1,33 @@
+<template lang="pug">
+EditorContent.rte-content(:editor="editor")
+</template>
+
+<script>
+import { EditorContent } from 'tiptap'
+
+import { mapState } from 'vuex'
+
+export default {
+  components: {
+    EditorContent
+  },
+
+  computed: {
+    ...mapState('editor', {
+      editor: 'editor'
+    })
+  }
+}
+</script>
+
+<style lang="scss">
 @import 'node_modules/vuetify/src/styles/settings/_variables.scss';
 @import 'node_modules/vuetify/src/styles/elements/_blockquote.sass';
+
 .ProseMirror[contenteditable]:focus {
   outline: 0px solid transparent;
 }
+
 .rte-content {
   pre > code {
     padding:10px;
@@ -10,9 +35,11 @@
       content: "";
     }
   }
+
   img {
     max-width: 100%;
   }
+
   table {
     width: 100%;
     text-align: center;
@@ -24,9 +51,11 @@
       // background-color: #eee;
     }
   }
+
   blockquote {
     @extend .blockquote;
   }
+
   // ul[data-type="todo_list"] {
   //   padding-left: 0;
   //   li[data-type="todo_item"] {
@@ -71,61 +100,4 @@
   //   }
   // } // [1]
 }
-.menububble {
-  position: absolute;
-  display: flex;
-  z-index: 20;
-  background: black;
-  border-radius: 5px;
-  padding: 0.3rem;
-  margin-bottom: 0.5rem;
-  transform: translateX(-50%);
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 0.2s, visibility 0.2s;
-  &.is-active {
-    opacity: 1;
-    visibility: visible;
-  }
-  // &__button {
-  //   display: inline-flex;
-  //   background: transparent;
-  //   border: 0;
-  //   color: white;
-  //   padding: 0.2rem 0.5rem;
-  //   margin-right: 0.2rem;
-  //   border-radius: 3px;
-  //   cursor: pointer;
-  //   &:last-child {
-  //     margin-right: 0;
-  //   }
-  //   &:hover {
-  //     background-color: rgba(white, 0.1);
-  //   }
-  //   &.is-active {
-  //     background-color: rgba(white, 0.2);
-  //   }
-  // }
-  // &__form {
-  //   display: flex;
-  //   align-items: center;
-  // }
-  // &__input {
-  //   font: inherit;
-  //   border: none;
-  //   background: transparent;
-  //   color: white;
-  // }
-}
-.floating-menu {
-  position: absolute;
-  z-index: 1;
-  margin-top: -0.25rem;
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 0.2s, visibility 0.2s;
-  &.is-active {
-    opacity: 1;
-    visibility: visible;
-  }
-}
+</style>

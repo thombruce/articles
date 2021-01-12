@@ -39,9 +39,9 @@
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
 
-import VDarkmodeToggle from '@/components/controls/v-darkmode-toggle'
-import VFullscreenToggle from '@/components/controls/v-fullscreen-toggle'
-import VEditorAppBar from '@/components/local/v-editor-app-bar.vue'
+import VDarkmodeToggle from '@/components/controls/VDarkmodeToggle'
+import VFullscreenToggle from '@/components/controls/VFullscreenToggle'
+import VEditorAppBar from '@/components/local/VEditorAppBar.vue'
 
 export default {
   components: {

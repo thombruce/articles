@@ -4,7 +4,7 @@ VContainer.pa-0(fluid fill-height)
 </template>
 
 <script>
-import VEditor from '@/components/v-editor'
+import VEditor from '@/components/VEditor'
 
 import { mapActions } from 'vuex'
 
