@@ -1,5 +1,5 @@
 <template lang="pug">
-  VSheet.editor-sheet.pa-4(width="100%" height="100%" @click="setFocus()")
+  VSheet.editor-sheet.pa-4(width="100%" height="100%" @click.self="setFocus()")
     VEditorMenuBubble
 
     VEditorFloatingMenu

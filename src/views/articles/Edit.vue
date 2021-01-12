@@ -6,7 +6,7 @@ VContainer.pa-0(fluid fill-height)
 <script>
 import VEditor from '@/components/VEditor'
 
-import { mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   components: {
@@ -17,6 +17,12 @@ export default {
     return {
       article: null
     }
+  },
+
+  computed: {
+    ...mapState('editor', {
+      editor: 'editor'
+    })
   },
 
   methods: {
@@ -38,6 +44,13 @@ export default {
   async mounted () {
     this.article = await this.show(this.$route.params.id)
     this.setEditorContent(this.article.content)
+    this.editor.focus()
+  },
+
+  watch: {
+    $route (to, from) {
+      this.editor.focus()
+    }
   },
 
   async beforeRouteUpdate (to, from, next) {
