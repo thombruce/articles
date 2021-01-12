@@ -51,7 +51,7 @@ const actions = {
   },
 
   async save ({ state, getters }) {
-    await db.updateArticle(state.currentId, getters.current)
+    if (getters.current) await db.updateArticle(state.currentId, getters.current)
   },
 
   async destroy ({ commit }, id) {

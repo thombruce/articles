@@ -21,6 +21,7 @@ const mutations = {
 
   delete (state, id) {
     Vue.delete(state.list, id)
+    state.currentId = null
   }
 }
 
