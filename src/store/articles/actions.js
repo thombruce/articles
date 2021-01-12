@@ -6,26 +6,32 @@ const db = new Database()
 
 const actions = {
   async init ({ dispatch, commit }, params) {
-    const articlesCount = await db.countArticles()
+    const articlesCount = await db.articles.count()
+
     commit('setCount', articlesCount)
     return dispatch('index', params)
   },
 
   async index ({ commit, getters }, params) {
-    const offset = params && params.offset
-    const limit = params && params.limit
+    const offset = (params && params.offset) || 0
+    const limit = (params && params.limit) || 10
 
-    const articles = await db.getArticles(offset, limit)
+    const articles = await db.articles
+      .orderBy('updatedAt')
+      .reverse()
+      .offset(offset)
+      .limit(limit)
+      .toArray()
+
     commit('push', articles)
-
     return getters.all
   },
 
   async show ({ commit, getters }, id) {
-    return await db.getArticle(id).then((article) => {
-      commit('insert', article)
-      return getters.current
-    })
+    const article = await db.articles.get(id)
+
+    commit('insert', article)
+    return getters.current
   },
 
   async new ({ commit, getters }) {
@@ -38,10 +44,10 @@ const actions = {
       updatedAt: timestamp
     }
 
-    return await db.addArticle(article).then(() => {
-      commit('insert', article)
-      return getters.current
-    })
+    await db.articles.add(article)
+
+    commit('insert', article)
+    return getters.current
   },
 
   async update ({ dispatch, commit, state, getters }, article) {
@@ -57,14 +63,14 @@ const actions = {
   },
 
   async save ({ state, getters }) {
-    if (getters.current) await db.updateArticle(state.currentId, getters.current)
+    if (getters.current) await db.articles.update(state.currentId, getters.current)
   },
 
   async destroy ({ commit }, id) {
-    return await db.deleteArticle(id).then(() => {
-      commit('delete', id)
-      return true
-    })
+    await db.articles.delete(id)
+
+    commit('delete', id)
+    return true
   }
 }
 
