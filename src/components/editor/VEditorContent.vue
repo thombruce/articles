@@ -29,20 +29,35 @@ export default {
 }
 
 .rte-content {
-  pre > code {
-    padding:10px;
-    &:before, &:after {
-      content: "";
+  h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 12px;
+  }
+  blockquote {
+    line-height: 1em;
+  }
+  hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  ol, ul {
+    li {
+      line-height: 1em;
     }
   }
-
+  pre > code {
+    padding:10px;
+    display: block;
+    &:before, &:after {
+      content: "" !important;
+    }
+  }
   img {
-    max-width: 100%;
+    max-width: 100% !important;
   }
 
   table {
-    width: 100%;
-    text-align: center;
+    width: 100% !important;
+    text-align: center !important;
     th {
       // color: #eee;
       // background-color: #333;
