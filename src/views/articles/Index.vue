@@ -59,6 +59,9 @@ export default {
   },
 
   computed: {
+    ...mapState('articles', {
+      total: 'count'
+    }),
     ...mapGetters('articles', {
       articles: 'all',
       latest: 'latest'
@@ -76,18 +79,21 @@ export default {
 
   methods: {
     ...mapActions('articles', [
+      'init',
       'index',
       'new'
     ]),
     async loadMore () {
-      this.busy = true
-      await this.index({ offset: this.count })
-      this.busy = false
+      if (this.count < this.total) {
+        this.busy = true
+        await this.index({ offset: this.count })
+        this.busy = false
+      }
     }
   },
 
   async created () {
-    await this.index()
+    await this.init()
 
     if (!this.$route.params.id) {
       const article = this.latest || await this.new()

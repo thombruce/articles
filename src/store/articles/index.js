@@ -4,7 +4,8 @@ import mutations from './mutations'
 
 const state = () => ({
   list: {},
-  currentId: null
+  currentId: null,
+  count: 0
 })
 
 const articles = {

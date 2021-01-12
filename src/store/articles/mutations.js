@@ -1,6 +1,10 @@
 import Vue from 'vue'
 
 const mutations = {
+  setCount (state, count) {
+    state.count = count
+  },
+
   push (state, articles) {
     articles = articles.reduce((obj, item) => {
       obj[item.id] = item

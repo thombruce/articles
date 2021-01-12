@@ -5,6 +5,12 @@ import { Database } from '@/database.js'
 const db = new Database()
 
 const actions = {
+  async init ({ dispatch, commit }, params) {
+    const articlesCount = await db.countArticles()
+    commit('setCount', articlesCount)
+    return dispatch('index', params)
+  },
+
   async index ({ commit, getters }, params) {
     const offset = params && params.offset
     const limit = params && params.limit

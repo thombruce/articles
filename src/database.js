@@ -12,6 +12,12 @@ export class Database extends Dexie {
     this.articles = this.table('articles')
   }
 
+  async countArticles () {
+    const articlesCount = await this.articles
+      .count()
+    return articlesCount
+  }
+
   async getArticles (offset = 0, limit = 10) {
     const articles = await this.articles
       .orderBy('updatedAt')
