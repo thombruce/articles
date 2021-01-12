@@ -55,15 +55,15 @@ const actions = {
           notAfter: ['heading', 'paragraph']
         })
       ],
-      onUpdate: ({ getJSON }) => {
-        dispatch('articles/update', { content: getJSON() }, { root: true })
+      onUpdate: ({ state, getJSON }) => {
+        dispatch('articles/update', { doc: getJSON(), text: state.doc.textContent }, { root: true })
       }
     })
     commit('init', editor)
   },
 
-  setEditorContent ({ state }, content) {
-    state.editor.setContent(content)
+  setEditorContent ({ state }, doc) {
+    state.editor.setContent(doc)
   },
 
   teardownEditor ({ commit }) {

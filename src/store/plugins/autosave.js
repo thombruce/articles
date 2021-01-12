@@ -4,8 +4,8 @@ import { Database } from '@/database.js'
 
 const db = new Database()
 
-const save = _.debounce(function (id, content) {
-  db.articles.update(id, content)
+const save = _.debounce(function (id, payload) {
+  db.articles.update(id, payload)
 }, 500, { maxWait: 2000 })
 
 const autosave = store => {

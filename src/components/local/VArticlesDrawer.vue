@@ -20,7 +20,8 @@
           @click="toggleOnMobile()"
         )
           VListItemContent
-            strong {{ article.content | textPreviewFromJSON }}
+            strong(v-if="article.text !== ''") {{ article.text | truncate(50) }}
+            strong(v-else) Untitled Note
             div
               time(:datetime="article.updatedAt") {{ article.updatedAt | formatDate }}
 

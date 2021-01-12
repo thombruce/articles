@@ -39,7 +39,8 @@ const actions = {
     const timestamp = new Date().getTime()
     const article = {
       id,
-      content: '',
+      doc: '',
+      text: '',
       createdAt: timestamp,
       updatedAt: timestamp
     }

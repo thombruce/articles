@@ -43,7 +43,7 @@ export default {
 
   async mounted () {
     this.article = await this.show(this.$route.params.id)
-    this.setEditorContent(this.article.content)
+    this.setEditorContent(this.article.doc)
     this.editor.focus()
   },
 
@@ -56,7 +56,7 @@ export default {
   async beforeRouteUpdate (to, from, next) {
     await this.save()
     this.article = await this.show(to.params.id)
-    this.setEditorContent(this.article.content)
+    this.setEditorContent(this.article.doc)
     next()
   },
 
