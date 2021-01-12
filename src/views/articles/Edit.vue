@@ -21,7 +21,8 @@ export default {
 
   methods: {
     ...mapActions('articles', [
-      'show'
+      'show',
+      'save'
     ]),
     ...mapActions('editor', [
       'initializeEditor',
@@ -40,6 +41,7 @@ export default {
   },
 
   async beforeRouteUpdate (to, from, next) {
+    await this.save()
     this.article = await this.show(to.params.id)
     this.setEditorContent(this.article.content)
     next()

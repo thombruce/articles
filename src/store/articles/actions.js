@@ -50,6 +50,10 @@ const actions = {
     return getters.current
   },
 
+  async save ({ state, getters }) {
+    await db.updateArticle(state.currentId, getters.current)
+  },
+
   async destroy ({ commit }, id) {
     return await db.deleteArticle(id).then(() => {
       commit('delete', id)

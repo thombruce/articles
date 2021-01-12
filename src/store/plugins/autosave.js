@@ -6,7 +6,7 @@ const db = new Database()
 
 const save = _.debounce(function (id, content) {
   db.updateArticle(id, content)
-}, 100, { maxWait: 500 })
+}, 500, { maxWait: 2000 })
 
 const autosave = store => {
   store.subscribe((mutation, _state) => {
