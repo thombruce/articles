@@ -60,7 +60,7 @@ const actions = {
     return getters.current
   },
 
-  async new ({ commit, getters }) {
+  async new ({ commit, state, getters }) {
     const id = uuidv4()
     const timestamp = new Date().getTime()
     const article = {
@@ -74,6 +74,8 @@ const actions = {
     await db.articles.add(article)
 
     commit('insert', article)
+    commit('pushIndexed', [article.id])
+    commit('setCount', state.total + 1)
     return getters.current
   },
 

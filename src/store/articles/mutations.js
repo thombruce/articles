@@ -29,7 +29,6 @@ const mutations = {
   insert (state, payload) {
     Vue.set(state.list, payload.id, payload)
     state.currentId = payload.id
-    state.count++
   },
 
   update (state, payload) {
