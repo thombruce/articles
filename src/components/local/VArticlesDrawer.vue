@@ -5,6 +5,9 @@
     clipped
     :mobile-breakpoint="$vuetify.breakpoint.thresholds.sm"
   )
+    template(v-slot:prepend)
+      VArticlesSearch
+
     VList
       VListItemGroup(
         v-infinite-scroll="loadMore"
@@ -36,9 +39,11 @@
 <script>
 import isElectron from 'is-electron'
 
-import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 
 import { createHelpers } from 'vuex-map-fields'
+
+import VArticlesSearch from '@/components/local/VArticlesSearch'
 
 import VDarkmodeToggle from '@/components/controls/VDarkmodeToggle'
 import VFullscreenToggle from '@/components/controls/VFullscreenToggle'
@@ -50,6 +55,7 @@ const { mapFields } = createHelpers({
 
 export default {
   components: {
+    VArticlesSearch,
     VDarkmodeToggle,
     VFullscreenToggle
   },
@@ -61,10 +67,8 @@ export default {
   },
 
   computed: {
-    ...mapState('articles', {
-      total: 'count'
-    }),
     ...mapGetters('articles', {
+      total: 'count',
       articles: 'all'
     }),
     ...mapFields([

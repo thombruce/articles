@@ -2,7 +2,11 @@ import Vue from 'vue'
 
 const mutations = {
   setCount (state, count) {
-    state.count = count
+    state.total = count
+  },
+
+  setQueryCount (state, queryCount) {
+    state.queryTotal = queryCount
   },
 
   push (state, articles) {
@@ -12,6 +16,14 @@ const mutations = {
     }, {})
 
     state.list = { ...state.list, ...articles }
+  },
+
+  pushIndexed (state, ids) {
+    state.indexed = [...state.indexed, ...ids]
+  },
+
+  pushQueried (state, ids) {
+    state.queried = [...state.queried, ...ids]
   },
 
   insert (state, payload) {
@@ -28,6 +40,11 @@ const mutations = {
     Vue.delete(state.list, id)
     state.currentId = null
     state.count--
+  },
+
+  setQuery (state, query) {
+    state.query = query
+    state.queried = []
   }
 }
 

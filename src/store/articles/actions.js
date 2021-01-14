@@ -12,7 +12,9 @@ const actions = {
     return dispatch('index', params)
   },
 
-  async index ({ commit, getters }, params) {
+  async index ({ dispatch, commit, state, getters }, params) {
+    if (state.query !== '') return dispatch('search', params)
+
     const offset = (params && params.offset) || 0
     const limit = (params && params.limit) || 10
 
@@ -24,7 +26,31 @@ const actions = {
       .toArray()
 
     commit('push', articles)
+
+    const ids = articles.map(article => article.id)
+    commit('pushIndexed', ids)
+
     return getters.all
+  },
+
+  async search ({ state, commit, getters }, params) {
+    const offset = (params && params.offset) || 0
+    const limit = (params && params.limit) || 10
+    const words = state.query.split(' ').filter(item => item)
+
+    const articles = await db.articles
+      .where('textWords')
+      .startsWithAnyOfIgnoreCase(words)
+      .distinct()
+      .offset(offset)
+      .limit(limit)
+      .toArray()
+
+    commit('push', articles)
+    const ids = articles.map(article => article.id)
+    commit('pushQueried', ids)
+
+    return getters.queried
   },
 
   async show ({ commit, getters }, id) {
@@ -72,6 +98,20 @@ const actions = {
 
     commit('delete', id)
     return true
+  },
+
+  async updateQuery ({ dispatch, commit }, query) {
+    const words = query.split(' ').filter(item => item)
+
+    const queriedCount = await db.articles
+      .where('textWords')
+      .startsWithAnyOfIgnoreCase(words)
+      .distinct()
+      .count()
+
+    commit('setQueryCount', queriedCount)
+    commit('setQuery', query)
+    dispatch('search')
   }
 }
 
