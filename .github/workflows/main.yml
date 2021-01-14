@@ -1,29 +1,28 @@
-# name: CI
+name: CI
 
-# on:
-#   push:
-#     branches: [ master ]
-#   pull_request:
-#     branches: [ master ]
-#   workflow_dispatch:
-#     branches: [ master ]
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+    branches: [ master ]
 
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-#     steps:
-#     - uses: actions/checkout@v2
+    steps:
+    - uses: actions/checkout@v2
 
-#     - uses: actions/setup-node@v1
-#       with:
-#         node-version: '14.x'
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '14.x'
 
-#     # NOTE: action-netlify-deploy has a built in install and build commands, that can't be disabled
-#     # - run: yarn install
+    - run: yarn install
 
-#     # - name: Build and Generate
-#     #   run: yarn build
+    - name: Build and Generate
+      run: yarn build
 
 #     - uses: jsmrcaga/action-netlify-deploy@v1.2.0
 #       with:
