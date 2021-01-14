@@ -9,12 +9,9 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    redirect: '/articles'
-  },
-  {
     path: '/articles',
     name: 'Articles',
+    alias: '/',
     component: Articles,
     children: [
       {
