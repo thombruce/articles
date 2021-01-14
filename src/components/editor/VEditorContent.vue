@@ -24,6 +24,17 @@ export default {
 @import 'node_modules/vuetify/src/styles/settings/_variables.scss';
 @import 'node_modules/vuetify/src/styles/elements/_blockquote.sass';
 
+.rte-content {
+  height: 100%;
+  max-height: 100%;
+  overflow-y: scroll;
+  .ProseMirror {
+    height: 100%;
+    max-height: 100%;
+    overflow-y: scroll;
+  }
+}
+
 .ProseMirror[contenteditable]:focus {
   outline: 0px solid transparent;
 }

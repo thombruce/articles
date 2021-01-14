@@ -3,13 +3,17 @@
     VArticlesDrawer
 
     VEditorAppBar(v-if="editor")
+    VAppBar(v-else app flat dense clipped-left)
+      VAppBarNavIcon(@click.stop="toggleDrawer()")
 
     VMain
-      RouterView
+      RouterView(v-if="$route.params.id")
+      VContainer.pa-0(v-else fluid fill-height)
+        VSheet(width="100%" height="100%" @click="newArticle()")
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions } from 'vuex'
+import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
 
 import VEditorAppBar from '@/components/local/VEditorAppBar.vue'
 import VArticlesDrawer from '@/components/local/VArticlesDrawer'
@@ -30,19 +34,21 @@ export default {
   },
 
   methods: {
+    ...mapMutations('ui', [
+      'toggleDrawer'
+    ]),
     ...mapActions('articles', [
       'init',
       'new'
-    ])
+    ]),
+    async newArticle () {
+      const article = await this.new()
+      this.$router.push({ name: 'EditArticle', params: { id: article.id } })
+    }
   },
 
   async created () {
     await this.init()
-
-    if (!this.$route.params.id) {
-      const article = this.latest || await this.new()
-      this.$router.replace({ name: 'EditArticle', params: { id: article.id } })
-    }
   }
 }
 </script>

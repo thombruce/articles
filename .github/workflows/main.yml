@@ -1,35 +1,35 @@
-name: CI
+# name: CI
 
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-  workflow_dispatch:
-    branches: [ master ]
+# on:
+#   push:
+#     branches: [ master ]
+#   pull_request:
+#     branches: [ master ]
+#   workflow_dispatch:
+#     branches: [ master ]
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
 
-    steps:
-    - uses: actions/checkout@v2
+#     steps:
+#     - uses: actions/checkout@v2
 
-    - uses: actions/setup-node@v1
-      with:
-        node-version: '14.x'
+#     - uses: actions/setup-node@v1
+#       with:
+#         node-version: '14.x'
 
-    # NOTE: action-netlify-deploy has a built in install and build commands, that can't be disabled
-    # - run: yarn install
+#     # NOTE: action-netlify-deploy has a built in install and build commands, that can't be disabled
+#     # - run: yarn install
 
-    # - name: Build and Generate
-    #   run: yarn build
+#     # - name: Build and Generate
+#     #   run: yarn build
 
-    - uses: jsmrcaga/action-netlify-deploy@v1.2.0
-      with:
-        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        install_command: yarn install
-        build_command: yarn build
-        build_directory: dist
-        NETLIFY_DEPLOY_TO_PROD: true
+#     - uses: jsmrcaga/action-netlify-deploy@v1.2.0
+#       with:
+#         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+#         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+#         install_command: yarn install
+#         build_command: yarn build
+#         build_directory: dist
+#         NETLIFY_DEPLOY_TO_PROD: true

@@ -1,5 +1,5 @@
 <template lang="pug">
-  VSheet.editor-sheet.pa-4(width="100%" height="100%" @click.self="setFocus()")
+  VSheet.editor-sheet.pa-4(width="100%" height="100%")
     VEditorMenuBubble
 
     VEditorFloatingMenu
@@ -25,12 +25,6 @@ export default {
     ...mapState('editor', {
       editor: 'editor'
     })
-  },
-
-  methods: {
-    setFocus () {
-      this.editor.focus()
-    }
   }
 }
 </script>
