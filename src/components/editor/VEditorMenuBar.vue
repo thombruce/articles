@@ -1,15 +1,6 @@
 <template lang="pug">
 EditorMenuBar(:editor="editor" v-slot="{ commands, isActive }")
-  VAppBar(app flat dense clipped-left)
-    VAppBarNavIcon(@click.stop="toggleDrawer()")
-
-    VSpacer
-
-    VBtn(icon @click="newArticle()")
-      VIcon mdi-plus-box
-
-    VDivider.mx-2(vertical)
-
+  .editor-menu-container
     VMenu
       template(v-slot:activator="{ on }")
         VBtn(
@@ -94,63 +85,22 @@ EditorMenuBar(:editor="editor" v-slot="{ commands, isActive }")
 
     VBtn(icon @click="commands.redo")
       VIcon mdi-redo
-
-    VSpacer
-
-    VConfirmBtn(:action="destroyArticle")
-      template(#button="{ on, attrs }")
-        VBtn.error--text(
-          icon
-          v-bind="attrs"
-          v-on="on"
-        )
-          VIcon mdi-delete
-      template(#dialog)
-        VCardTitle.headline
-          | Are you sure?
-        VCardText
-          | If you delete this article, you won't be able to retrieve it.
 </template>
 
 <script>
 import { EditorMenuBar } from 'tiptap'
 
-import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
-
-import VConfirmBtn from './VConfirmBtn'
+import { mapState } from 'vuex'
 
 export default {
   components: {
-    EditorMenuBar,
-    VConfirmBtn
+    EditorMenuBar
   },
 
   computed: {
     ...mapState('editor', {
       editor: 'editor'
-    }),
-    ...mapGetters('articles', {
-      latest: 'latest'
     })
-  },
-
-  methods: {
-    ...mapMutations('ui', [
-      'toggleDrawer'
-    ]),
-    ...mapActions('articles', [
-      'new',
-      'destroy'
-    ]),
-    async newArticle () {
-      const article = await this.new()
-      this.$router.push({ name: 'EditArticle', params: { id: article.id } })
-    },
-    async destroyArticle () {
-      await this.destroy(this.$route.params.id)
-      const article = this.latest || await this.new()
-      this.$router.push({ name: 'EditArticle', params: { id: article.id } })
-    }
   }
 }
 </script>
