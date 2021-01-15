@@ -32,18 +32,14 @@ export default {
     ]),
     ...mapActions('editor', [
       'initializeEditor',
-      'setEditorContent',
+      'resetEditor',
       'teardownEditor'
     ])
   },
 
-  created () {
-    this.initializeEditor()
-  },
-
   async mounted () {
     this.article = await this.show(this.$route.params.id)
-    this.setEditorContent(this.article.doc)
+    this.initializeEditor(this.article.doc)
     this.editor.focus()
   },
 
@@ -56,7 +52,7 @@ export default {
   async beforeRouteUpdate (to, from, next) {
     await this.save()
     this.article = await this.show(to.params.id)
-    this.setEditorContent(this.article.doc)
+    this.resetEditor(this.article.doc)
     next()
   },
 

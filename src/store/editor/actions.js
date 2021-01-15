@@ -26,7 +26,7 @@ import {
 } from 'tiptap-extensions'
 
 const actions = {
-  initializeEditor ({ dispatch, commit }) {
+  initializeEditor ({ dispatch, commit }, doc) {
     const editor = new Editor({
       extensions: [
         new Blockquote(),
@@ -55,6 +55,7 @@ const actions = {
           notAfter: ['heading', 'paragraph']
         })
       ],
+      content: doc,
       onUpdate: ({ state, getJSON }) => {
         dispatch('articles/update', { doc: getJSON(), text: state.doc.textContent }, { root: true })
       }
@@ -62,8 +63,9 @@ const actions = {
     commit('init', editor)
   },
 
-  setEditorContent ({ state }, doc) {
-    state.editor.setContent(doc)
+  resetEditor ({ dispatch }, doc) {
+    dispatch('teardownEditor')
+    dispatch('initializeEditor', doc)
   },
 
   teardownEditor ({ commit }) {
