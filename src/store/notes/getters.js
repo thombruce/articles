@@ -1,8 +1,8 @@
 const getters = {
   all: (state, getters, _rootState, _rootGetters) => {
-    const articles = state.query !== '' ? getters.queried : getters.indexed
+    const notes = state.query !== '' ? getters.queried : getters.indexed
 
-    return articles.sort((a, b) => {
+    return notes.sort((a, b) => {
       return b.updatedAt - a.updatedAt
     })
   },
@@ -13,13 +13,13 @@ const getters = {
 
   indexed: (state) => {
     return Object.values(state.list).filter(
-      article => state.indexed.includes(article.id)
+      note => state.indexed.includes(note.id)
     )
   },
 
   queried: (state) => {
     return Object.values(state.list).filter(
-      article => state.queried.includes(article.id)
+      note => state.queried.includes(note.id)
     )
   },
 

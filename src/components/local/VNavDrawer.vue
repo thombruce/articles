@@ -6,7 +6,7 @@
     :mobile-breakpoint="$vuetify.breakpoint.thresholds.sm"
   )
     template(v-slot:prepend)
-      VArticlesSearch
+      VNavSearch
 
     VList
       VListItemGroup(
@@ -15,18 +15,18 @@
         infinite-scroll-distance="50"
       )
         VListItem(
-          v-for="article in articles"
-          :key="article.id"
-          :to="{ name: 'EditArticle', params: { id: article.id } }"
+          v-for="note in notes"
+          :key="note.id"
+          :to="{ name: 'EditNote', params: { id: note.id } }"
           two-line
           link
           @click="toggleOnMobile()"
         )
           VListItemContent
-            strong(v-if="article.text !== ''") {{ article.text | truncate(50) }}
+            strong(v-if="note.text !== ''") {{ note.text | truncate(50) }}
             strong(v-else) Untitled Note
             div
-              time(:datetime="article.updatedAt") {{ article.updatedAt | formatDate }}
+              time(:datetime="note.updatedAt") {{ note.updatedAt | formatDate }}
 
     template(v-slot:append)
       .row.pa-2
@@ -43,7 +43,7 @@ import { mapGetters, mapActions, mapMutations } from 'vuex'
 
 import { createHelpers } from 'vuex-map-fields'
 
-import VArticlesSearch from '@/components/local/VArticlesSearch'
+import VNavSearch from '@/components/local/VNavSearch'
 
 import VDarkmodeToggle from '@/components/controls/VDarkmodeToggle'
 import VFullscreenToggle from '@/components/controls/VFullscreenToggle'
@@ -55,7 +55,7 @@ const { mapFields } = createHelpers({
 
 export default {
   components: {
-    VArticlesSearch,
+    VNavSearch,
     VDarkmodeToggle,
     VFullscreenToggle
   },
@@ -67,15 +67,15 @@ export default {
   },
 
   computed: {
-    ...mapGetters('articles', {
+    ...mapGetters('notes', {
       total: 'count',
-      articles: 'all'
+      notes: 'all'
     }),
     ...mapFields([
       'drawer'
     ]),
     count () {
-      return this.articles.length
+      return this.notes.length
     },
     isElectron () {
       return isElectron()
@@ -90,7 +90,7 @@ export default {
     ...mapMutations('ui', [
       'toggleDrawer'
     ]),
-    ...mapActions('articles', [
+    ...mapActions('notes', [
       'index'
     ]),
     async loadMore () {

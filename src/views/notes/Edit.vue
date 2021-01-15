@@ -15,7 +15,7 @@ export default {
 
   data () {
     return {
-      article: null
+      note: null
     }
   },
 
@@ -26,7 +26,7 @@ export default {
   },
 
   methods: {
-    ...mapActions('articles', [
+    ...mapActions('notes', [
       'show',
       'save'
     ]),
@@ -38,8 +38,8 @@ export default {
   },
 
   async mounted () {
-    this.article = await this.show(this.$route.params.id)
-    this.initializeEditor(this.article.doc)
+    this.note = await this.show(this.$route.params.id)
+    this.initializeEditor(this.note.doc)
     this.editor.focus()
   },
 
@@ -51,8 +51,8 @@ export default {
 
   async beforeRouteUpdate (to, from, next) {
     await this.save()
-    this.article = await this.show(to.params.id)
-    this.resetEditor(this.article.doc)
+    this.note = await this.show(to.params.id)
+    this.resetEditor(this.note.doc)
     next()
   },
 

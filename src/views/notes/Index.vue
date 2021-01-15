@@ -1,6 +1,6 @@
 <template lang="pug">
   VApp
-    VArticlesDrawer
+    VNavDrawer
 
     VNavBar
 
@@ -12,16 +12,16 @@
 import { mapState, mapGetters, mapActions } from 'vuex'
 
 import VNavBar from '@/components/local/VNavBar.vue'
-import VArticlesDrawer from '@/components/local/VArticlesDrawer'
+import VNavDrawer from '@/components/local/VNavDrawer'
 
 export default {
   components: {
     VNavBar,
-    VArticlesDrawer
+    VNavDrawer
   },
 
   computed: {
-    ...mapGetters('articles', {
+    ...mapGetters('notes', {
       latest: 'latest'
     }),
     ...mapState('editor', {
@@ -30,13 +30,13 @@ export default {
   },
 
   methods: {
-    ...mapActions('articles', [
+    ...mapActions('notes', [
       'init',
       'new'
     ]),
-    async newArticle () {
-      const article = await this.new()
-      this.$router.push({ name: 'EditArticle', params: { id: article.id } })
+    async newNote () {
+      const note = await this.new()
+      this.$router.push({ name: 'EditNote', params: { id: note.id } })
     }
   },
 
@@ -44,8 +44,8 @@ export default {
     await this.init()
 
     if (!this.$route.params.id) {
-      const article = this.latest || await this.new()
-      this.$router.replace({ name: 'EditArticle', params: { id: article.id } })
+      const note = this.latest || await this.new()
+      this.$router.replace({ name: 'EditNote', params: { id: note.id } })
     }
   }
 }

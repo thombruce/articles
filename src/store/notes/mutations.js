@@ -9,13 +9,13 @@ const mutations = {
     state.queryTotal = queryCount
   },
 
-  push (state, articles) {
-    articles = articles.reduce((obj, item) => {
+  push (state, notes) {
+    notes = notes.reduce((obj, item) => {
       obj[item.id] = item
       return obj
     }, {})
 
-    state.list = { ...state.list, ...articles }
+    state.list = { ...state.list, ...notes }
   },
 
   pushIndexed (state, ids) {

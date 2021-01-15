@@ -2,7 +2,7 @@
 VAppBar(app flat dense clipped-left)
   VAppBarNavIcon(@click.stop="toggleDrawer()")
 
-  VBtn(icon @click="newArticle()")
+  VBtn(icon @click="newNote()")
     VIcon mdi-plus-box
 
   VSpacer
@@ -12,7 +12,7 @@ VAppBar(app flat dense clipped-left)
 
     VSpacer.d-none.d-sm-block
 
-  VConfirmBtn(v-if="currentArticle" :action="destroyArticle")
+  VConfirmBtn(v-if="currentNote" :action="destroyNote")
     template(#button="{ on, attrs }")
       VBtn.error--text(
         icon
@@ -24,7 +24,7 @@ VAppBar(app flat dense clipped-left)
       VCardTitle.headline
         | Are you sure?
       VCardText
-        | If you delete this article, you won't be able to retrieve it.
+        | If you delete this note, you won't be able to retrieve it.
 </template>
 
 <script>
@@ -40,14 +40,14 @@ export default {
   },
 
   computed: {
-    ...mapGetters('articles', {
+    ...mapGetters('notes', {
       latest: 'latest'
     }),
     ...mapState('editor', {
       editor: 'editor'
     }),
-    ...mapState('articles', {
-      currentArticle: 'currentId'
+    ...mapState('notes', {
+      currentNote: 'currentId'
     })
   },
 
@@ -55,18 +55,18 @@ export default {
     ...mapMutations('ui', [
       'toggleDrawer'
     ]),
-    ...mapActions('articles', [
+    ...mapActions('notes', [
       'new',
       'destroy'
     ]),
-    async newArticle () {
-      const article = await this.new()
-      this.$router.push({ name: 'EditArticle', params: { id: article.id } })
+    async newNote () {
+      const note = await this.new()
+      this.$router.push({ name: 'EditNote', params: { id: note.id } })
     },
-    async destroyArticle () {
+    async destroyNote () {
       await this.destroy(this.$route.params.id)
-      const article = this.latest || await this.new()
-      this.$router.push({ name: 'EditArticle', params: { id: article.id } })
+      const note = this.latest || await this.new()
+      this.$router.push({ name: 'EditNote', params: { id: note.id } })
     }
   }
 }

@@ -6,9 +6,9 @@ const db = new Database()
 
 const actions = {
   async init ({ dispatch, commit }, params) {
-    const articlesCount = await db.articles.count()
+    const notesCount = await db.notes.count()
 
-    commit('setCount', articlesCount)
+    commit('setCount', notesCount)
     return dispatch('index', params)
   },
 
@@ -18,16 +18,16 @@ const actions = {
     const offset = (params && params.offset) || 0
     const limit = (params && params.limit) || 10
 
-    const articles = await db.articles
+    const notes = await db.notes
       .orderBy('updatedAt')
       .reverse()
       .offset(offset)
       .limit(limit)
       .toArray()
 
-    commit('push', articles)
+    commit('push', notes)
 
-    const ids = articles.map(article => article.id)
+    const ids = notes.map(note => note.id)
     commit('pushIndexed', ids)
 
     return getters.all
@@ -38,7 +38,7 @@ const actions = {
     const limit = (params && params.limit) || 10
     const words = state.query.split(' ').filter(item => item)
 
-    const articles = await db.articles
+    const notes = await db.notes
       .where('textWords')
       .startsWithAnyOfIgnoreCase(words)
       .distinct()
@@ -46,24 +46,24 @@ const actions = {
       .limit(limit)
       .toArray()
 
-    commit('push', articles)
-    const ids = articles.map(article => article.id)
+    commit('push', notes)
+    const ids = notes.map(note => note.id)
     commit('pushQueried', ids)
 
     return getters.queried
   },
 
   async show ({ commit, getters }, id) {
-    const article = await db.articles.get(id)
+    const note = await db.notes.get(id)
 
-    commit('insert', article)
+    commit('insert', note)
     return getters.current
   },
 
   async new ({ commit, state, getters }) {
     const id = uuidv4()
     const timestamp = new Date().getTime()
-    const article = {
+    const note = {
       id,
       doc: '',
       text: '',
@@ -71,32 +71,32 @@ const actions = {
       updatedAt: timestamp
     }
 
-    await db.articles.add(article)
+    await db.notes.add(note)
 
-    commit('insert', article)
-    commit('pushIndexed', [article.id])
+    commit('insert', note)
+    commit('pushIndexed', [note.id])
     commit('setCount', state.total + 1)
     return getters.current
   },
 
-  async update ({ dispatch, commit, state, getters }, article) {
+  async update ({ dispatch, commit, state, getters }, note) {
     const timestamp = new Date().getTime()
-    article = {
+    note = {
       ...getters.current,
-      ...article,
+      ...note,
       ...{ updatedAt: timestamp }
     }
 
-    commit('update', article)
+    commit('update', note)
     return getters.current
   },
 
   async save ({ state, getters }) {
-    if (getters.current) await db.articles.update(state.currentId, getters.current)
+    if (getters.current) await db.notes.update(state.currentId, getters.current)
   },
 
   async destroy ({ commit }, id) {
-    await db.articles.delete(id)
+    await db.notes.delete(id)
 
     commit('delete', id)
     return true
@@ -105,7 +105,7 @@ const actions = {
   async updateQuery ({ dispatch, commit }, query) {
     const words = query.split(' ').filter(item => item)
 
-    const queriedCount = await db.articles
+    const queriedCount = await db.notes
       .where('textWords')
       .startsWithAnyOfIgnoreCase(words)
       .distinct()

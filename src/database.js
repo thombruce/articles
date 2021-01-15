@@ -6,16 +6,16 @@ export class Database extends Dexie {
     super('database')
 
     this.version(1).stores({
-      articles: '$$id,doc,text,createdAt,updatedAt,*textWords'
+      notes: '$$id,doc,text,createdAt,updatedAt,*textWords'
     })
 
-    this.articles = this.table('articles')
+    this.notes = this.table('notes')
 
-    this.articles.hook('creating', function (_primKey, obj, _trans) {
+    this.notes.hook('creating', function (_primKey, obj, _trans) {
       if (typeof obj.text === 'string') obj.textWords = getAllWords(obj.text)
     })
 
-    this.articles.hook('updating', function (mods, _primKey, _obj, _trans) {
+    this.notes.hook('updating', function (mods, _primKey, _obj, _trans) {
       if (Object.prototype.hasOwnProperty.call(mods, 'text')) {
         if (typeof mods.text === 'string') {
           return { textWords: getAllWords(mods.text) }
@@ -42,7 +42,7 @@ function getAllWords (text) {
 // A potential solution looks a bit like this:
 
 // this.version(1).stores({
-//   articles: '$$id,doc,text,createdAt,updatedAt,*textWords,[textWords+updatedAt]'
+//   notes: '$$id,doc,text,createdAt,updatedAt,*textWords,[textWords+updatedAt]'
 // })
 
 // In theory, anyway, [textWords+updatedAt] would create a combined index, but I do not
@@ -50,7 +50,7 @@ function getAllWords (text) {
 
 // If it works, it would allow me to do the below:
 
-// db.articles
+// db.notes
 //   .where('[textWords+updatedAt]')
 //   .startsWithAnyOfIgnoreCase(words)
 //   .offset(offset)

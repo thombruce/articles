@@ -12,7 +12,7 @@ const state = () => ({
   currentId: null
 })
 
-const articles = {
+const notes = {
   namespaced: true,
   state,
   getters,
@@ -20,4 +20,4 @@ const articles = {
   mutations
 }
 
-export default articles
+export default notes

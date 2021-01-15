@@ -57,7 +57,7 @@ const actions = {
       ],
       content: doc,
       onUpdate: ({ state, getJSON }) => {
-        dispatch('articles/update', { doc: getJSON(), text: state.doc.textContent }, { root: true })
+        dispatch('notes/update', { doc: getJSON(), text: state.doc.textContent }, { root: true })
       }
     })
     commit('init', editor)

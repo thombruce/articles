@@ -3,24 +3,24 @@ import VueRouter from 'vue-router'
 
 import isElectron from 'is-electron'
 
-import Articles from '../views/articles/Index.vue'
+import Notes from '../views/notes/Index.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/articles',
-    name: 'Articles',
+    path: '/notes',
+    name: 'Notes',
     alias: '/',
-    component: Articles,
+    component: Notes,
     children: [
       {
-        path: '/articles/:id',
-        name: 'EditArticle',
+        path: '/notes/:id',
+        name: 'EditNote',
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "editArticle" */ '../views/articles/Edit.vue')
+        component: () => import(/* webpackChunkName: "editNote" */ '../views/notes/Edit.vue')
       }
     ]
   }

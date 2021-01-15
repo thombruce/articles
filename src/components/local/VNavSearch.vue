@@ -15,7 +15,7 @@ export default {
   computed: {
     query: {
       get () {
-        return this.$store.state.articles.query
+        return this.$store.state.notes.query
       },
       set (val) {
         this.updateQuery(val)
@@ -24,7 +24,7 @@ export default {
   },
 
   methods: {
-    ...mapActions('articles', [
+    ...mapActions('notes', [
       'updateQuery'
     ])
   }

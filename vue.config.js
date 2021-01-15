@@ -3,7 +3,7 @@ module.exports = {
     'vuetify'
   ],
   pwa: {
-    name: 'Articles',
+    name: 'Notes',
     workboxPluginMode: 'GenerateSW',
     workboxOptions: {
       navigateFallback: '/index.html',
