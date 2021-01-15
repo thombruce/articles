@@ -3,7 +3,7 @@ EditorMenuBar(:editor="editor" v-slot="{ commands, isActive }")
   .editor-menu-container
     VMenu
       template(v-slot:activator="{ on }")
-        VBtn(
+        VBtn.d-none.d-md-inline(
           icon
           v-on="on"
           :input-value="isActive.heading()"
@@ -29,7 +29,7 @@ EditorMenuBar(:editor="editor" v-slot="{ commands, isActive }")
         )
           VListItemTitle Heading 3
 
-    VDivider.mx-2(vertical)
+    VDivider.mx-2.d-none.d-md-inline-block(vertical)
 
     VBtn(icon :input-value="isActive.bold()" @click="commands.bold")
       VIcon mdi-format-bold
@@ -42,16 +42,16 @@ EditorMenuBar(:editor="editor" v-slot="{ commands, isActive }")
 
     VDivider.mx-2(vertical)
 
-    VBtn(icon :input-value="isActive.horizontal_rule()" @click="commands.horizontal_rule")
+    VBtn.d-none.d-md-inline(icon :input-value="isActive.horizontal_rule()" @click="commands.horizontal_rule")
       VIcon mdi-minus
 
-    VBtn(icon :input-value="isActive.blockquote()" @click="commands.blockquote")
+    VBtn.d-none.d-md-inline(icon :input-value="isActive.blockquote()" @click="commands.blockquote")
       VIcon mdi-format-quote-close
 
-    VBtn(icon :input-value="isActive.bullet_list()" @click="commands.bullet_list")
+    VBtn.d-none.d-md-inline(icon :input-value="isActive.bullet_list()" @click="commands.bullet_list")
       VIcon mdi-format-list-bulleted
 
-    VBtn(icon :input-value="isActive.ordered_list()" @click="commands.ordered_list")
+    VBtn.d-none.d-md-inline(icon :input-value="isActive.ordered_list()" @click="commands.ordered_list")
       VIcon mdi-format-list-numbered
 
     //VBtn(icon :input-value="isActive.todo_list()" @click="commands.todo_list") // [1]
@@ -70,12 +70,12 @@ EditorMenuBar(:editor="editor" v-slot="{ commands, isActive }")
     //VBtn(icon :input-value="isActive.link()" @click="commands.link")
     //  VIcon mdi-link
 
-    VDivider.mx-2(vertical)
+    VDivider.mx-2.d-none.d-md-inline-block(vertical)
 
     VBtn(icon :input-value="isActive.code()" @click="commands.code")
       VIcon mdi-code-tags
 
-    VBtn(icon :input-value="isActive.code_block()" @click="commands.code_block")
+    VBtn.d-none.d-md-inline(icon :input-value="isActive.code_block()" @click="commands.code_block")
       VIcon mdi-code-brackets
 
     VDivider.mx-2(vertical)

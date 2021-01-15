@@ -19,6 +19,12 @@ EditorFloatingMenu(:editor="editor" v-slot="{ commands, isActive, getMarkAttrs, 
     VBtn(icon :input-value="isActive.blockquote()" @click="commands.blockquote")
       VIcon mdi-format-quote-close
 
+    VBtn(icon :input-value="isActive.bullet_list()" @click="commands.bullet_list")
+      VIcon mdi-format-list-bulleted
+
+    VBtn(icon :input-value="isActive.ordered_list()" @click="commands.ordered_list")
+      VIcon mdi-format-list-numbered
+
     // rte-image-dialog(:command="commands.image")
 
     VBtn(icon :input-value="isActive.code_block()" @click="commands.code_block")
