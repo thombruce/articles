@@ -6,6 +6,7 @@ module.exports = {
     name: 'Articles',
     workboxPluginMode: 'GenerateSW',
     workboxOptions: {
+      navigateFallback: '/index.html',
       exclude: [
         '_redirects'
       ]
