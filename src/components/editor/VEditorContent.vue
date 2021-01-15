@@ -1,5 +1,5 @@
 <template lang="pug">
-EditorContent.rte-content(:editor="editor")
+EditorContent.rte-content(:editor="editor" autocapitalize="on")
 </template>
 
 <script>
