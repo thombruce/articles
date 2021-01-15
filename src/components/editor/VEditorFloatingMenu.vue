@@ -4,16 +4,14 @@ EditorFloatingMenu(:editor="editor" v-slot="{ commands, isActive, getMarkAttrs, 
     :class="{ 'is-active': menu.isActive }"
     :style="`top: ${menu.top}px`"
   )
-    VBtn(icon small :input-value="isActive.heading({ level: 1 })" @click="commands.heading({ level: 1 })")
-      VIcon mdi-format-header-1
+    VBtn(icon :input-value="isActive.heading({ level: 1 })" @click="commands.heading({ level: 1 })")
+      VIcon(size="24px") mdi-format-header-1
 
-    VBtn(icon small :input-value="isActive.heading({ level: 2 })" @click="commands.heading({ level: 2 })")
-      VIcon mdi-format-header-2
+    VBtn(icon :input-value="isActive.heading({ level: 2 })" @click="commands.heading({ level: 2 })")
+      VIcon(size="20px") mdi-format-header-2
 
-    VBtn(icon small :input-value="isActive.heading({ level: 3 })" @click="commands.heading({ level: 3 })")
-      VIcon mdi-format-header-3
-
-    VDivider.mx-2(vertical)
+    VBtn(icon :input-value="isActive.heading({ level: 3 })" @click="commands.heading({ level: 3 })")
+      VIcon(size="16px") mdi-format-header-3
 
     VBtn(icon :input-value="isActive.horizontal_rule()" @click="commands.horizontal_rule")
       VIcon mdi-minus
@@ -21,11 +19,7 @@ EditorFloatingMenu(:editor="editor" v-slot="{ commands, isActive, getMarkAttrs, 
     VBtn(icon :input-value="isActive.blockquote()" @click="commands.blockquote")
       VIcon mdi-format-quote-close
 
-    VDivider.mx-2(vertical)
-
     // rte-image-dialog(:command="commands.image")
-
-    // VDivider.mx-2(vertical)
 
     VBtn(icon :input-value="isActive.code_block()" @click="commands.code_block")
       VIcon mdi-code-brackets
@@ -53,7 +47,7 @@ export default {
 .floating-menu {
   position: absolute;
   z-index: 1;
-  margin-top: -0.25rem;
+  margin-top: -0.35rem;
   visibility: hidden;
   opacity: 0;
   transition: opacity 0.2s, visibility 0.2s;
