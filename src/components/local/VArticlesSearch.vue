@@ -1,7 +1,8 @@
 <template lang="pug">
   VTextField(
     label="Search"
-    v-model="query"
+    :value="query"
+    @input="query = $event"
     single-line
     prepend-inner-icon="mdi-magnify"
   )
