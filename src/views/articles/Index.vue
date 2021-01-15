@@ -6,8 +6,6 @@
 
     VMain
       RouterView(v-if="$route.params.id")
-      VContainer.pa-0(v-else fluid fill-height)
-        VSheet(width="100%" height="100%" @click="newArticle()")
 </template>
 
 <script>
@@ -44,6 +42,11 @@ export default {
 
   async created () {
     await this.init()
+
+    if (!this.$route.params.id) {
+      const article = this.latest || await this.new()
+      this.$router.replace({ name: 'EditArticle', params: { id: article.id } })
+    }
   }
 }
 </script>
