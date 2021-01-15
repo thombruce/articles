@@ -10,7 +10,7 @@ VAppBar(app flat dense clipped-left)
   template(v-if="editor")
     VEditorMenuBar(v-if="editor")
 
-    VSpacer
+    VSpacer.d-none.d-sm-block
 
   VConfirmBtn(v-if="currentArticle" :action="destroyArticle")
     template(#button="{ on, attrs }")

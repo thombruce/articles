@@ -31,16 +31,16 @@ EditorMenuBar(:editor="editor" v-slot="{ commands, isActive }")
 
     VDivider.mx-2.d-none.d-md-inline-block(vertical)
 
-    VBtn(icon :input-value="isActive.bold()" @click="commands.bold")
+    VBtn.d-none.d-sm-inline(icon :input-value="isActive.bold()" @click="commands.bold")
       VIcon mdi-format-bold
 
-    VBtn(icon :input-value="isActive.italic()" @click="commands.italic")
+    VBtn.d-none.d-sm-inline(icon :input-value="isActive.italic()" @click="commands.italic")
       VIcon mdi-format-italic
 
-    VBtn(icon :input-value="isActive.strike()" @click="commands.strike")
+    VBtn.d-none.d-sm-inline(icon :input-value="isActive.strike()" @click="commands.strike")
       VIcon mdi-format-strikethrough
 
-    VDivider.mx-2(vertical)
+    VDivider.mx-2.d-none.d-sm-inline-block(vertical)
 
     VBtn.d-none.d-md-inline(icon :input-value="isActive.horizontal_rule()" @click="commands.horizontal_rule")
       VIcon mdi-minus
@@ -72,19 +72,21 @@ EditorMenuBar(:editor="editor" v-slot="{ commands, isActive }")
 
     VDivider.mx-2.d-none.d-md-inline-block(vertical)
 
-    VBtn(icon :input-value="isActive.code()" @click="commands.code")
+    VBtn.d-none.d-sm-inline(icon :input-value="isActive.code()" @click="commands.code")
       VIcon mdi-code-tags
 
     VBtn.d-none.d-md-inline(icon :input-value="isActive.code_block()" @click="commands.code_block")
       VIcon mdi-code-brackets
 
-    VDivider.mx-2(vertical)
+    VDivider.mx-2.d-none.d-sm-inline-block(vertical)
 
     VBtn(icon @click="commands.undo")
       VIcon mdi-undo
 
     VBtn(icon @click="commands.redo")
       VIcon mdi-redo
+
+    VDivider.mx-2.d-inline-block.d-sm-none(vertical)
 </template>
 
 <script>
