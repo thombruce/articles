@@ -38,13 +38,7 @@ const actions = {
     const limit = (params && params.limit) || 10
     const words = state.query.split(' ').filter(item => item)
 
-    const notes = await db.notes
-      .where('textWords')
-      .startsWithAnyOfIgnoreCase(words)
-      .distinct()
-      .offset(offset)
-      .limit(limit)
-      .toArray()
+    const notes = words.length > 0 ? await db.searchNotes(words, offset, limit) : []
 
     commit('push', notes)
     const ids = notes.map(note => note.id)

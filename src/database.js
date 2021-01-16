@@ -25,6 +25,33 @@ export class Database extends Dexie {
       }
     })
   }
+
+  // Full Text Search (Multiple Words)
+  // Based on: https://github.com/dfahlander/Dexie.js/issues/281#issuecomment-229228163
+  searchNotes (words, offset, limit) {
+    return this.transaction('r', this.notes, function * () {
+      const results = yield Dexie.Promise.all(
+        words.map(
+          word =>
+            this.notes
+              .where('textWords')
+              .startsWithIgnoreCase(word)
+              .distinct()
+              .offset(offset)
+              .limit(limit)
+              .primaryKeys()
+        )
+      )
+
+      const reduced = results
+        .reduce((a, b) => {
+          const set = new Set(b)
+          return a.filter(k => set.has(k))
+        })
+
+      return yield this.notes.where(':id').anyOf(reduced).toArray()
+    })
+  }
 }
 
 function getAllWords (text) {
