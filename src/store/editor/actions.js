@@ -32,7 +32,7 @@ const actions = {
         new Blockquote(),
         new CodeBlock(),
         new HorizontalRule(),
-        new Heading({ levels: [1, 2, 3] }),
+        new Heading({ levels: [1, 2, 3, 4, 5, 6] }),
         new BulletList(),
         new OrderedList(),
         new ListItem(),

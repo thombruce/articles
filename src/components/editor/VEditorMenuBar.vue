@@ -29,6 +29,24 @@ EditorMenuBar(:editor="editor" v-slot="{ commands, isActive }")
         )
           VListItemTitle Heading 3
 
+        VListItem(
+          :input-value="isActive.heading({ level: 4 })"
+          @click="commands.heading({ level: 4 })"
+        )
+          VListItemTitle Heading 4
+
+        VListItem(
+          :input-value="isActive.heading({ level: 5 })"
+          @click="commands.heading({ level: 5 })"
+        )
+          VListItemTitle Heading 5
+
+        VListItem(
+          :input-value="isActive.heading({ level: 6 })"
+          @click="commands.heading({ level: 6 })"
+        )
+          VListItemTitle Heading 6
+
     VDivider.mx-2.d-none.d-md-inline-block(vertical)
 
     VBtn.d-none.d-sm-inline(icon :input-value="isActive.bold()" @click="commands.bold")
